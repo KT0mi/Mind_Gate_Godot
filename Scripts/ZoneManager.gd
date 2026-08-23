@@ -28,8 +28,10 @@ func move_to(
 	if to_zone == Zone.Type.ARENA:
 		player.arena_lanes[lane] = card
 		card.lane = lane
+		SoundManager.play(&"enter_arena")
 	else:
 		player.zone_array(to_zone).append(card)
+	
 	
 	card.current_zone = to_zone
 	if GameState.is_continuous_source_active(card):

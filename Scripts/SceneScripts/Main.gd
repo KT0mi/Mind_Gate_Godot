@@ -10,6 +10,7 @@ const DECK_BUILDER_SCENE := "res://Scenes/DeckBuilder.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	MusicManager.play_track(&"test", MusicManager.DEFAULT_FADE, -25.0)
 	duel_button.pressed.connect(_on_duel_pressed)
 	deck_builder_button.pressed.connect(_on_deck_builder_pressed)
 	deck_selector.choose_deck.connect(func(id): StateData.chosen_deck = id)

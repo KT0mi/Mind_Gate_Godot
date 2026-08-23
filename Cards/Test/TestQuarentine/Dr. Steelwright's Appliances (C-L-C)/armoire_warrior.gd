@@ -12,6 +12,10 @@ func _init() -> void:
 func is_battle_ready(_card: CardInstance) -> bool:
 	return false
 
+func get_display_text(_instance: CardInstance, context : bool = false) -> String:
+	return "%s. This card cannot attack. Whenever anything attacks this card, it gets -1 Attack." \
+		% CardText.keyword(CardKeywords.TAUNT, context)
+
 func _build_abilities() -> Array[Ability]:
 	return [
 		CardKeywords.TAUNT_ABILITY(),

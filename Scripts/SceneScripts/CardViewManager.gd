@@ -66,11 +66,16 @@ func _on_zone_changed(card: CardInstance, from_zone: Zone.Type, to_zone: Zone.Ty
 		node._refresh_visuals()
 		return
 	
+	
+	
 	AnimationQueue.enqueue(func() -> void:
 		var old_holder : CardHolder = _holder_nodes.get(_key(card.owner, from_zone, from_lane))
 		if old_holder:
 			await old_holder.remove_card(node)
-	
+		
+		if to_zone == Zone.Type.GRAVEYARD:
+			SoundManager.play(&"card_death")
+		
 		var holder: CardHolder = _holder_nodes.get(_key(card.owner, to_zone, to_lane))
 		if holder:
 			var prev_mode := node.interaction_mode

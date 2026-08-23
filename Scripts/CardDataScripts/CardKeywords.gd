@@ -5,7 +5,6 @@ class_name CardKeywords extends RefCounted
 #and not specific card actions
 
 class Keyword extends RefCounted:
-	static var _keywords : Dictionary[StringName,Keyword]
 	var id : StringName
 	var name: String
 	var description: String
@@ -14,33 +13,45 @@ class Keyword extends RefCounted:
 		id = i
 		name = nm
 		description = dscpt
-		_keywords[id] = self
-	
-	static func get_keyword(i : StringName) -> Keyword:
-		return _keywords.get(i)
+
+static var _keywords : Dictionary[StringName, Keyword] = {}
 
 ## ------ Flags ------
 const DAZED := &"dazed"
 
 ## ------ Keywords ------
 const TAUNT := &"taunt"
-static var Taunt : Keyword = Keyword.new(
-	TAUNT,
-	"Taunt",
-	"All attacks against your player card are redirected to this card if they weren't redirected already."
-)
+static var Taunt : Keyword 
 const QUICK := &"quick"
-static var Quick : Keyword = Keyword.new(
-	QUICK,
-	"Quick",
-	"When this card is played, it doesn't become 'Dazed'."
-)
+static var Quick : Keyword 
 const BLOCK := &"block"
-static var Block : Keyword = Keyword.new(
-	BLOCK,
-	"Block",
-	"This card receives all damage that the card on the opposing lane deals."
-)
+static var Block : Keyword 
+
+#Init all Keywords as data structures
+static func _static_init() -> void:
+	Taunt = Keyword.new(
+		TAUNT,
+		"Taunt",
+		"All attacks against your player card are redirected to this card if they weren't redirected already."
+	)
+	Quick = Keyword.new(
+		QUICK,
+		"Quick",
+		"When this card is played, it doesn't become 'Dazed'."
+	)
+	Block = Keyword.new(
+		BLOCK,
+		"Block",
+		"This card receives all damage that the card on the opposing lane deals."
+	)
+	_keywords = {
+		TAUNT: Taunt,
+		QUICK: Quick,
+		BLOCK: Block,
+	}
+
+static func get_keyword(i : StringName) -> Keyword:
+		return _keywords.get(i)
 
 ## -------- IDs -----
 const BLEEDING_HEART := &"bleeding_heart"

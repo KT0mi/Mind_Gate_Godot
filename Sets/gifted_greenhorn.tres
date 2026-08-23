@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardSet" format=3 uid="uid://dow7u37l4gc0b"]
+
+[ext_resource type="Script" uid="uid://btpg74qh4o4sw" path="res://Scripts/CardDataScripts/CardSet.gd" id="1_won8u"]
+
+[resource]
+script = ExtResource("1_won8u")
+id = &"gifted_greenhorn"
+display_name = "Gifted Greenhorn"
+metadata/_custom_type_script = "uid://btpg74qh4o4sw"

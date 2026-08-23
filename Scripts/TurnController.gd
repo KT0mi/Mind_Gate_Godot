@@ -17,6 +17,7 @@ func round_counter() -> int:
 	return ceili(turn_counter/2.0)
 
 func start_match() -> void:
+	MusicManager.play_track(&"match_song", MusicManager.DEFAULT_FADE, -25.0)
 	await RulesEngine.setup_match()
 	current_player = GameState.player_one
 	turn_counter = 1
@@ -42,6 +43,11 @@ func forget_turn() -> void:
 	var forgetting_player := current_player
 	forgetting = true
 	await DamagePipeline.apply_damage(forgetting_player.get_player_card(), 2, current_player.get_player_card(), DamageEvent.Reason.STATE)
+	
+	#Store Data
+	current_player.match_data.turns_forgotten += 1
+	current_player.turn_data.forgot = true
+	
 	for i in range(4):
 		if forgetting_player == current_player:
 			await advance_phase()
@@ -87,6 +93,11 @@ func _end_turn_and_pass() -> void:
 	var event := PhaseEvent.new(current_player)
 	await TriggerSystem.emit(Events.END_PHASE_END, event)
 	
+	#Save turn data into match data and reset turn data
+	current_player.match_data.player_turns.append(current_player.turn_data)
+	current_player.reset_turn_data()
+	
+	#Change current player
 	current_player = GameState.opponent_of(current_player)
 	turn_counter += 1
 	await _enter_phase(Phase.START_TURN)

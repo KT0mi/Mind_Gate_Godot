@@ -10,6 +10,31 @@ var graveyard: Array[CardInstance] = []
 var player_zone: Array[CardInstance] = []
 var spellbook: Array[CardInstance] = []
 
+#Match and Turn Data
+class TurnData:
+	var cards_played : Array[CardInstance] = []
+	var drew_cards: bool = false
+	var forgot: bool = false
+var turn_data : TurnData = TurnData.new()
+
+func cards_played_in_turn() -> int:
+	return turn_data.cards_played.size()
+
+class MatchData:
+	var cards_played : Array[CardInstance] = []
+	var turns_forgotten : int = 0
+	var player_turns : Array[TurnData] = []
+var match_data : MatchData = MatchData.new()
+
+func cards_played_in_match() -> int:
+	return match_data.cards_played.size()
+
+func reset_match_data() -> void:
+	match_data = MatchData.new()
+
+func reset_turn_data() -> void:
+	turn_data = TurnData.new()
+
 func _init(name: String) -> void:
 	player_name = name
 

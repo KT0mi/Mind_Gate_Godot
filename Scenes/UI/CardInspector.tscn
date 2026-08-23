@@ -49,10 +49,12 @@ mouse_filter = 2
 theme_override_constants/separation = 20
 
 [node name="CardName" type="Label" parent="Overlay/CardElementContainer" unique_id=676601898]
+custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
 theme_override_font_sizes/font_size = 50
 text = "CARD NAME"
+autowrap_mode = 3
 
 [node name="CardText" type="RichTextLabel" parent="Overlay/CardElementContainer" unique_id=506720010]
 layout_mode = 2

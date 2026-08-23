@@ -4,8 +4,8 @@ func _init() -> void:
 	id = &"faulty_mecha_toaster"
 	card_name = "Faulty Mecha-Toaster"
 	card_text = "When this card is played, it attacks a random opponent creature, if it wins, it attacks again."
-	gate = CardGate.BasicGate(20)
-	attack = 3
+	gate = CardGate.BasicGate(25)
+	attack = 2
 	endurance = 2
 	sets = ["dr_steelwrights_appliances"]
 	

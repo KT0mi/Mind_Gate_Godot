@@ -15,6 +15,10 @@ run/main_scene="uid://do2gnkf5o8vj3"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://drrp146ea1okc"
+
 [autoload]
 
 TriggerSystem="*uid://yhjby1hhpxk7"
@@ -36,6 +40,8 @@ AiController="*uid://d2ebkkl6d4aw2"
 HoverHandler="*uid://df4x08a3mum00"
 AnimationQueue="*uid://drkq3imte4kea"
 CardInspector="*uid://4nw1jbk3fpm7"
+SoundManager="*uid://c72c0xbbiq4cg"
+MusicManager="*uid://6qjdsq68p1np"
 
 [debug]
 

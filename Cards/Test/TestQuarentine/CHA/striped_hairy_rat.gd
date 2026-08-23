@@ -9,5 +9,8 @@ func _init() -> void:
 	endurance = 2
 	sets = ["pantagruel_islet"]
 	
+func get_display_text(_instance: CardInstance, context : bool = false) -> String:
+	return "%s." % CardText.keyword(CardKeywords.QUICK, context)
+
 func _build_abilities() -> Array[Ability]:
 	return [CardKeywords.QUICK_ABILITY()]

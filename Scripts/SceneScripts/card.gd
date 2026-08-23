@@ -68,10 +68,13 @@ func _setup_visuals() -> void:
 	if def is SpellCardDefinition:
 		$Labels/Attack.visible = false
 		$Labels/Endurance.visible = false
+	else:
+		$Labels/Attack.visible = true
+		$Labels/Endurance.visible = true
 	if card_instance.get_display_text() == "":
 		$Labels/CardText.visible = false
-		#$Labels/CardText/CardTextRect.set_size(Vector2(233, 216))
-		#card_text_label.set_size(Vector2(113, 105))
+	else: 
+		$Labels/CardText.visible = true
 
 func _refresh_visuals() -> void:
 	#Fill with visual representation of card instance
@@ -216,6 +219,7 @@ func _start_drag() -> void:
 	z_index = HOVER_Z_INDEX
 	
 	picked_up.emit(self)
+	SoundManager.play(&"card_interact")
 	
 func _update_drop_target(mouse_pos: Vector2) -> void:
 	var candidate := CardViewManager.holder_at_point(mouse_pos)
@@ -235,6 +239,7 @@ func _end_drag() -> void:
 		_active_drag = null
 	
 	dropped.emit(self)
+	SoundManager.play(&"card_interact")
 	
 	var holder := _drop_target
 	if holder:
@@ -277,6 +282,8 @@ func play_attack_lunge(target_global_pos:Vector2, lunge_ratio:float =0.80) -> vo
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "global_position", start_pos, 0.20) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await tween.step_finished
+	SoundManager.play(&"card_attack")
 	await tween.finished
 	
 #endregion
