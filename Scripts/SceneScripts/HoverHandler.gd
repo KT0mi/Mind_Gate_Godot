@@ -1,6 +1,8 @@
 extends CanvasLayer
 ##Autoload
 
+signal hover_source_changed(source: Node)
+
 @export var padding : float = 4.0
 @export var tween_duration: float = 0.12
 
@@ -16,7 +18,10 @@ func _ready() -> void:
 	_sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func focus(source: CanvasItem, local_rect: Rect2, instant: bool = false) -> void:
+	var source_changed := source != _current
 	_current = source
+	if source_changed:
+		hover_source_changed.emit(_current)
 	if not source.tree_exiting.is_connected(unfocus):
 		source.tree_exiting.connect(unfocus.bind(source), CONNECT_ONE_SHOT)
 
@@ -57,7 +62,17 @@ func unfocus(source: Node) -> void:
 		_current = null
 		if _tween: _tween.kill()
 		_sprite.visible = false
+		hover_source_changed.emit(null)
 
+##Method to force the hover to unfocus despite any current node being selected
+##Used on scripts outside the ui nodes, e.g: CardInspector
+func force_unfocus() -> void:
+	if _current == null:
+		return
+	_current = null
+	if _tween: _tween.kill()
+	_sprite.visible = false
+	hover_source_changed.emit(null)
 ## Convenience for plain Controls (buttons, panels) -- one line to opt in,
 ## no subclassing needed.
 func register_hover(control: Control) -> void:

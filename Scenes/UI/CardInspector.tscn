@@ -2,10 +2,31 @@
 
 [ext_resource type="Script" uid="uid://c6lv1nlg552mi" path="res://Scripts/SceneScripts/CardInspector.gd" id="1_0nlpk"]
 [ext_resource type="Theme" uid="uid://bxjx78kc5nbmv" path="res://Theme/default_theme.tres" id="2_fxm2w"]
+[ext_resource type="PackedScene" uid="uid://m2ppxj3bxj07" path="res://Scenes/UI/ModifierEntry.tscn" id="3_ggrrv"]
 [ext_resource type="PackedScene" uid="uid://07qc2b2jhuei" path="res://Scenes/Card.tscn" id="3_uf5sv"]
 
 [node name="CardInspector" type="CanvasLayer" unique_id=1817531272]
 script = ExtResource("1_0nlpk")
+
+[node name="PersistCardText" type="RichTextLabel" parent="." unique_id=370299198]
+visible = false
+custom_minimum_size = Vector2(480, 128)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -176.0
+offset_right = 512.0
+offset_bottom = -32.000244
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("2_fxm2w")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT"
+fit_content = true
+scroll_active = true
 
 [node name="Overlay" type="Control" parent="." unique_id=1566470372]
 layout_mode = 3
@@ -23,11 +44,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.12, 0.12, 0.12, 0.44705883)
+color = Color(0.12, 0.12, 0.12, 0.7058824)
 
 [node name="CardModifierContainer" type="VBoxContainer" parent="Overlay" unique_id=1913591263]
 layout_mode = 0
-offset_left = 1216.0
+offset_left = 1248.0
 offset_top = 64.0
 offset_right = 1856.0
 offset_bottom = 1024.0
@@ -39,17 +60,23 @@ theme = ExtResource("2_fxm2w")
 theme_override_font_sizes/font_size = 50
 text = "Modifier List:"
 
+[node name="ModifierEntry" parent="Overlay/CardModifierContainer" unique_id=1061973721 instance=ExtResource("3_ggrrv")]
+layout_mode = 2
+
+[node name="ModifierEntry2" parent="Overlay/CardModifierContainer" unique_id=1101085584 instance=ExtResource("3_ggrrv")]
+layout_mode = 2
+
 [node name="CardElementContainer" type="VBoxContainer" parent="Overlay" unique_id=2007587472]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 64.0
-offset_right = 704.0
+offset_right = 668.0
 offset_bottom = 1024.0
 mouse_filter = 2
 theme_override_constants/separation = 20
 
 [node name="CardName" type="Label" parent="Overlay/CardElementContainer" unique_id=676601898]
-custom_minimum_size = Vector2(640, 0)
+custom_minimum_size = Vector2(604, 0)
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
 theme_override_font_sizes/font_size = 50
@@ -57,6 +84,7 @@ text = "CARD NAME"
 autowrap_mode = 3
 
 [node name="CardText" type="RichTextLabel" parent="Overlay/CardElementContainer" unique_id=506720010]
+custom_minimum_size = Vector2(604, 0)
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
 theme_override_font_sizes/normal_font_size = 30
@@ -72,11 +100,11 @@ mouse_filter = 2
 theme_override_constants/separation = 60
 alignment = 1
 
-[node name="EnduranceLabel" type="Label" parent="Overlay/CardElementContainer/StatContainer" unique_id=877804809]
+[node name="AttackLabel" type="Label" parent="Overlay/CardElementContainer/StatContainer" unique_id=1223924077]
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
 theme_override_font_sizes/font_size = 28
-text = "Endurance:
+text = "Attack:
 0"
 horizontal_alignment = 1
 
@@ -88,29 +116,29 @@ text = "Gate:
 0"
 horizontal_alignment = 1
 
-[node name="AttackLabel" type="Label" parent="Overlay/CardElementContainer/StatContainer" unique_id=1223924077]
+[node name="EnduranceLabel" type="Label" parent="Overlay/CardElementContainer/StatContainer" unique_id=877804809]
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
 theme_override_font_sizes/font_size = 28
-text = "Attack:
+text = "Endurance:
 0"
 horizontal_alignment = 1
 
 [node name="CardPreview" type="SubViewportContainer" parent="Overlay" unique_id=442865856]
 layout_mode = 0
-offset_left = 768.0
-offset_top = 256.0
-offset_right = 1128.0
-offset_bottom = 876.0
+offset_left = 672.0
+offset_top = 80.0
+offset_right = 1184.0
+offset_bottom = 991.0
 mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Overlay/CardPreview" unique_id=2128745398]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(360, 620)
+size = Vector2i(512, 911)
 render_target_update_mode = 4
 
 [node name="PreviewCard" parent="Overlay/CardPreview/SubViewport" unique_id=528451555 instance=ExtResource("3_uf5sv")]
-position = Vector2(180, 310)
-scale = Vector2(2.5, 2.5)
+position = Vector2(256, 456)
+scale = Vector2(4, 4)

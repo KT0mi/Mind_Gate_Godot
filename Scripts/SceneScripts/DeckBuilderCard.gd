@@ -27,7 +27,8 @@ func setup(def: CardDefinition) -> void:
 	definition = def
 	sprite.texture = def.art
 	name_label.text = def.card_name
-	card_text_label.text = def.card_text
+	TextHandler.fit_label(name_label, 18, 8)
+	$Labels/CardText.visible = false
 	gate_label.text = CardViewManager.format_gate_label(def.gate)
 
 	if def is CreatureCardDefinition:

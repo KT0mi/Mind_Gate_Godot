@@ -35,8 +35,7 @@ const HOVER_Z_INDEX := 100
 #Visual Vars
 @onready var sprite: Sprite2D = $Sprite
 @onready var name_label: Label = $Labels/Name/NameLabel
-@onready var attack_label: Label = $Labels/Attack/AttackLabel
-@onready var endurance_label: Label = $Labels/Endurance/EnduranceLabel
+@onready var stat_label : Label = $Labels/StatLabel/StatLabel
 @onready var gate_label: Label = $Labels/Gate/GateLabel
 @onready var card_text_label: RichTextLabel = $Labels/CardText/CardTextLabel
 @onready var card_back: ColorRect = $CardBack
@@ -66,33 +65,26 @@ func _setup_visuals() -> void:
 	var def : CardDefinition = card_instance.definition
 	sprite.texture = def.art
 	if def is SpellCardDefinition:
-		$Labels/Attack.visible = false
-		$Labels/Endurance.visible = false
+		$Labels/StatLabel.visible = false
 	else:
-		$Labels/Attack.visible = true
-		$Labels/Endurance.visible = true
-	if card_instance.get_display_text() == "":
-		$Labels/CardText.visible = false
-	else: 
-		$Labels/CardText.visible = true
+		$Labels/StatLabel.visible = true
+	$Labels/CardText.visible = false
 
 func _refresh_visuals() -> void:
 	#Fill with visual representation of card instance
 	var def : CardDefinition = card_instance.definition
 	name_label.text = def.card_name
+	#TextHandler.fit_label(name_label, 18, 10)
 	card_text_label.text = card_instance.get_display_text()
 	gate_label.text = CardViewManager.format_gate_label(card_instance.get_gate())
 	_gated_feedback(card_instance)
 	card_fx.get_active_fx(card_instance)
 	if def is CreatureCardDefinition:
-		endurance_label.text = "%d" % card_instance.get_endurance()
-		attack_label.text = "%d" % card_instance.get_attack()
+		stat_label.text = "%d/%d" % [card_instance.get_attack(), card_instance.get_endurance()]
+		#attack_label.text = "%d" % card_instance.get_attack()
 		
-		_apply_modified_feedback(attack_label, card_instance.get_attack(), def.attack)
-		_apply_modified_feedback(endurance_label, card_instance.get_endurance(), def.endurance)
-	else:	
-		endurance_label.text = ""
-		attack_label.text = ""
+		#_apply_modified_feedback(attack_label, card_instance.get_attack(), def.attack)
+		#_apply_modified_feedback(endurance_label, card_instance.get_endurance(), def.endurance)
 	_update_hidden_state()
 
 func _gated_feedback(card : CardInstance) -> void:
@@ -283,7 +275,7 @@ func play_attack_lunge(target_global_pos:Vector2, lunge_ratio:float =0.80) -> vo
 	tween.tween_property(self, "global_position", start_pos, 0.20) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	await tween.step_finished
-	SoundManager.play(&"card_attack")
+	SoundManager.play(&"card_attack", -15.0)
 	await tween.finished
 	
 #endregion

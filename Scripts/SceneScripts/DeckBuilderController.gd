@@ -153,6 +153,7 @@ func _refresh_entry(id: StringName) -> void:
 	if count > 0 and not _deck_entries.has(id):
 		var entry := _instantiate_entry(deck_list, def, DeckBuilderCard.Context.DECK)
 		entry.remove_requested.connect(_on_remove)
+		HoverHandler.register_hover(entry)
 		_deck_entries[id] = entry
 	elif count == 0 and _deck_entries.has(id):
 		_deck_entries[id].queue_free()

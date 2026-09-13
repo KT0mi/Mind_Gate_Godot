@@ -1,6 +1,8 @@
 extends CanvasLayer
 ##Autoload
 
+@onready var _persistent_text_box : RichTextLabel = $PersistCardText
+
 @onready var _overlay: Control = $Overlay
 @onready var _dim_background: ColorRect = $Overlay/DimBackground
 
@@ -22,13 +24,18 @@ var _card : CardInstance = null
 func _ready() -> void:
 	layer = 90
 	_overlay.visible = false
+	_persistent_text_box.visible = false
+	_persistent_text_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_dim_background.gui_input.connect(_on_dim_background_input)
+	HoverHandler.hover_source_changed.connect(_on_hover_source_changed)
 	
 func open(card: CardInstance) -> void:
 	if card == null: return
 	_card = card
 	_refresh()
 	_overlay.visible = true
+	_hide_hover_context()
+	HoverHandler.force_unfocus()
 
 func close() -> void:
 	if not _overlay.visible: return
@@ -48,6 +55,41 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_dim_background_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		close()
+
+## --- Hover context (persistent, lightweight inspect)
+
+func _on_hover_source_changed(source: Node) -> void:
+	if is_open() or source == null:
+		_hide_hover_context()
+		return
+	if source is Card:
+		_show_hover_instance(source.card_instance)
+	elif source is DeckBuilderCard:
+		_show_hover_definition(source.definition)
+	else:
+		_hide_hover_context()
+
+func _show_hover_instance(card: CardInstance) -> void:
+	if card == null:
+		_hide_hover_context()
+		return
+	if CardViewManager.is_card_hidden_from_local_view(card) and not DebugSettings.reveal_hidden_cards:
+		_hide_hover_context()
+		return
+	_show_hover_text(card.get_display_text(true))
+
+func _show_hover_definition(def: CardDefinition) -> void:
+	if def == null:
+		_hide_hover_context()
+		return
+	_show_hover_text(def.get_display_text(CardInstance.new(def, null), true))
+
+func _show_hover_text(text: String) -> void:
+	_persistent_text_box.text = text
+	_persistent_text_box.visible = text != ""
+
+func _hide_hover_context() -> void:
+	_persistent_text_box.visible = false
 
 ## --- Populating
 
@@ -79,15 +121,20 @@ func _rebuild_modifiers_list() -> void:
 	for child in _modifiers_list.get_children():
 		child.queue_free()
 	
+	var modifier_list_label := Label.new()
+	modifier_list_label.text = "Modifier List:"
+	modifier_list_label.theme = DEFAULT_THEME
+	modifier_list_label.add_theme_font_size_override("font_size", 50)
+	
 	var sections : Array = []
 	if _card.definition is CreatureCardDefinition:
-		sections.append(["Attack", ContinuousEffect.Kind.ATTACK, _card.current_attack, _card.attack_modifiers])
-		sections.append(["Endurance",ContinuousEffect.Kind.ENDURANCE, _card.current_endurance, _card.endurance_modifiers])
-	sections.append(["Gate",ContinuousEffect.Kind.ENDURANCE, _card.definition.gate, _card.gate_modifiers])
+		sections.append(["Attack", ContinuousEffect.Kind.ATTACK, _card.current_attack, _card.attack_modifiers, AttackCheck.new(_card)])
+		sections.append(["Endurance",ContinuousEffect.Kind.ENDURANCE, _card.current_endurance, _card.endurance_modifiers, EnduranceCheck.new(_card)])
+	sections.append(["Gate",ContinuousEffect.Kind.GATE, _card.definition.gate, _card.gate_modifiers, GateCheck.new(_card)])
 	
 	var any_entries := false
 	for section in sections:
-		var entries := _build_timeline(section[1], section[2], section[3])
+		var entries := _build_timeline(section[1], section[2], section[3], section[4])
 		if entries.is_empty():
 			continue
 		any_entries = true
@@ -103,7 +150,7 @@ func _rebuild_modifiers_list() -> void:
 	if not any_entries:
 		_add_header("No active modifiers or continuous effects.")
 
-func _build_timeline(kind : ContinuousEffect.Kind, start_value, permanent_modifiers:Array) -> Array[Array]:
+func _build_timeline(kind : ContinuousEffect.Kind, start_value, permanent_modifiers:Array, ctx : CheckContext) -> Array[Array]:
 	var entries : Array[Array] = []
 	var value = start_value
 	
@@ -118,18 +165,18 @@ func _build_timeline(kind : ContinuousEffect.Kind, start_value, permanent_modifi
 			_format_value(value, before)
 		])
 		
-	for m in _collect_continuous(kind, ContinuousEffect.Layer.SET):
+	for m in _collect_continuous(kind, ctx, ContinuousEffect.Layer.SET):
 		var before = value
-		value = m.ce.effect.call(value, m.source, _card)
+		value = m.ce.effect.call(value, m.source, ctx)
 		entries.append([
 			m.source.definition.card_name,
 			m.ce.label,
 			_format_value(value, before)
 		])
 	
-	for m in _collect_continuous(kind, ContinuousEffect.Layer.DELTA):
+	for m in _collect_continuous(kind, ctx, ContinuousEffect.Layer.DELTA):
 		var before = value
-		value = m.ce.effect.call(value, m.source, _card)
+		value = m.ce.effect.call(value, m.source, ctx)
 		entries.append([
 			m.source.definition.card_name,
 			m.ce.label,
@@ -148,7 +195,7 @@ func _format_value(value, before) -> String:
 ## whose applies_to(source, this_card) matches, sorted oldest-source-first
 ## -- mirrors CheckSystem._collect, but scoped to a single card as target
 ## since that's all the popup needs.
-func _collect_continuous(kind: ContinuousEffect.Kind, layer: ContinuousEffect.Layer) -> Array:
+func _collect_continuous(kind: ContinuousEffect.Kind, ctx:CheckContext, layer: ContinuousEffect.Layer) -> Array:
 	var matches : Array = []
 	for source : CardInstance in GameState.all_player_cards():
 		if not GameState.is_continuous_source_active(source):
@@ -156,7 +203,7 @@ func _collect_continuous(kind: ContinuousEffect.Kind, layer: ContinuousEffect.La
 		for ce in source.definition.get_continuous_effects():
 			if ce.kind != kind or ce.layer != layer:
 				continue
-			if ce.applies_to.call(source, _card):
+			if ce.applies_to.call(source, ctx):
 				matches.append({"source": source, "ce": ce})
 	matches.sort_custom(func(a, b): return a.source.continuous_since < b.source.continuous_since)
 	return matches
