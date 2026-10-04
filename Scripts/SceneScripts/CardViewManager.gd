@@ -158,7 +158,7 @@ func format_gate_label(gate : CardGate) -> String:
 		return ""
 	match gate.gate_type:
 		CardGate.GateType.NONE:
-			return ""
+			return "-"
 		CardGate.GateType.LESS_THAN:
 			return "<%d" % gate.value
 		CardGate.GateType.GREATER_THAN:

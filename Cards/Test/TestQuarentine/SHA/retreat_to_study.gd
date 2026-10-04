@@ -10,6 +10,7 @@ func _init() -> void:
 
 func resolve_effect(card: CardInstance, _event: PlayCardEvent) -> void:
 	var candidates := card.owner.hand.duplicate()
+	candidates.erase(card)
 	if candidates.is_empty(): return
 	
 	var target := await ChoiceManager.request_card(

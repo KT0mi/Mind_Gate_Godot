@@ -1,6 +1,11 @@
 extends CanvasLayer
 ##Autoload
 
+const CARD_SCENE := preload("res://Scenes/DeckBuilderCard.tscn")
+@onready var _zone_inspector : Control = $ZoneInspector
+@onready var _cards_container : GridContainer = $ZoneInspector/CardZoneContainer/CardsContainer
+@onready var _zone_inspector_dim_background: ColorRect = $ZoneInspector/DimBackground
+
 @onready var _persistent_text_box : RichTextLabel = $PersistCardText
 
 @onready var _overlay: Control = $Overlay
@@ -23,14 +28,19 @@ var _card : CardInstance = null
 
 func _ready() -> void:
 	layer = 90
+	_zone_inspector.visible = false
 	_overlay.visible = false
 	_persistent_text_box.visible = false
 	_persistent_text_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_dim_background.gui_input.connect(_on_dim_background_input)
+	_zone_inspector_dim_background.gui_input.connect(_on_dim_background_input)
 	HoverHandler.hover_source_changed.connect(_on_hover_source_changed)
-	
+
 func open(card: CardInstance) -> void:
 	if card == null: return
+	if card.current_zone == Zone.Type.GRAVEYARD or card.current_zone == Zone.Type.DECK:
+		return open_zone_inspector(card)
+	if CardViewManager.is_card_hidden_from_local_view(card): return
 	_card = card
 	_refresh()
 	_overlay.visible = true
@@ -38,15 +48,21 @@ func open(card: CardInstance) -> void:
 	HoverHandler.force_unfocus()
 
 func close() -> void:
-	if not _overlay.visible: return
-	_card = null
-	_overlay.visible = false
+	if is_open():
+		_card = null
+		_overlay.visible = false
+		return
+	if is_zone_inspector_open():
+		_zone_inspector.visible = false
 
 func is_open() -> bool:
 	return _overlay.visible
 	
+func is_zone_inspector_open() -> bool:
+	return _zone_inspector.visible
+
 func _unhandled_input(event: InputEvent) -> void:
-	if not _overlay.visible:
+	if not is_open() and not is_zone_inspector_open():
 		return
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		close()
@@ -56,8 +72,35 @@ func _on_dim_background_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		close()
 
-## --- Hover context (persistent, lightweight inspect)
+## -- Zone Inspector --
 
+func open_zone_inspector(card_instance: CardInstance) -> void:
+	if card_instance.current_zone == Zone.Type.DECK and card_instance.owner != GameState.local_player: return
+	_zone_inspector.visible = true
+	
+	var cards := card_instance.owner.zone_array(card_instance.current_zone).duplicate()
+	_populate_zone_inspector(cards, card_instance.current_zone == Zone.Type.GRAVEYARD)
+
+func _populate_zone_inspector(cards: Array[CardInstance], is_graveyard: bool) -> void:
+	for c in _cards_container.get_children():
+		c.queue_free()
+	
+	if is_graveyard: cards.shuffle()
+	
+	for c in cards:
+		var def := c.definition
+		var entry := _instantiate_entry(_cards_container, def)
+		HoverHandler.register_hover(entry)
+
+func _instantiate_entry(parent: Node, def: CardDefinition) -> DeckBuilderCard:
+	var entry : DeckBuilderCard = CARD_SCENE.instantiate()
+	parent.add_child(entry)   # add_child BEFORE setup() -- @onready vars need the node in the tree first
+	entry.setup(def)
+	entry.set_context(DeckBuilderCard.Context.VIEW)
+	return entry
+
+
+## --- Hover context (persistent, lightweight inspect)
 func _on_hover_source_changed(source: Node) -> void:
 	if is_open() or source == null:
 		_hide_hover_context()

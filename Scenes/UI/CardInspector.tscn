@@ -5,6 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://m2ppxj3bxj07" path="res://Scenes/UI/ModifierEntry.tscn" id="3_ggrrv"]
 [ext_resource type="PackedScene" uid="uid://07qc2b2jhuei" path="res://Scenes/Card.tscn" id="3_uf5sv"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggrrv"]
+bg_color = Color(0.85882354, 0.8666667, 0.8862745, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.09803922, 0.09803922, 0.20392157, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="CardInspector" type="CanvasLayer" unique_id=1817531272]
 script = ExtResource("1_0nlpk")
 
@@ -26,9 +38,52 @@ theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT"
 fit_content = true
-scroll_active = true
+
+[node name="ZoneInspector" type="Control" parent="." unique_id=912267618]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DimBackground" type="ColorRect" parent="ZoneInspector" unique_id=1395588854]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.12, 0.12, 0.7058824)
+
+[node name="Panel" type="Panel" parent="ZoneInspector" unique_id=1437855335]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = 160.0
+offset_right = -192.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ggrrv")
+
+[node name="CardZoneContainer" type="ScrollContainer" parent="ZoneInspector" unique_id=55040339]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 192.0
+offset_right = 1696.0
+offset_bottom = 896.0
+horizontal_scroll_mode = 0
+
+[node name="CardsContainer" type="GridContainer" parent="ZoneInspector/CardZoneContainer" unique_id=758764791]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+columns = 11
 
 [node name="Overlay" type="Control" parent="." unique_id=1566470372]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,9 +92,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DimBackground" type="ColorRect" parent="Overlay" unique_id=1395588854]
-layout_mode = 1
-anchors_preset = 15
+[node name="DimBackground" type="ColorRect" parent="Overlay" unique_id=1748877761]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -87,8 +141,8 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(604, 0)
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
-theme_override_font_sizes/normal_font_size = 30
-theme_override_font_sizes/bold_font_size = 30
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true
 text = "CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT"
 fit_content = true
@@ -103,7 +157,7 @@ alignment = 1
 [node name="AttackLabel" type="Label" parent="Overlay/CardElementContainer/StatContainer" unique_id=1223924077]
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 30
 text = "Attack:
 0"
 horizontal_alignment = 1
@@ -111,7 +165,7 @@ horizontal_alignment = 1
 [node name="GateLabel" type="Label" parent="Overlay/CardElementContainer/StatContainer" unique_id=2009940992]
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 30
 text = "Gate:
 0"
 horizontal_alignment = 1
@@ -119,26 +173,26 @@ horizontal_alignment = 1
 [node name="EnduranceLabel" type="Label" parent="Overlay/CardElementContainer/StatContainer" unique_id=877804809]
 layout_mode = 2
 theme = ExtResource("2_fxm2w")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 30
 text = "Endurance:
 0"
 horizontal_alignment = 1
 
 [node name="CardPreview" type="SubViewportContainer" parent="Overlay" unique_id=442865856]
 layout_mode = 0
-offset_left = 672.0
-offset_top = 80.0
-offset_right = 1184.0
-offset_bottom = 991.0
+offset_left = 713.0
+offset_top = 144.0
+offset_right = 1145.0
+offset_bottom = 864.0
 mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Overlay/CardPreview" unique_id=2128745398]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(512, 911)
-render_target_update_mode = 4
+size = Vector2i(432, 720)
+render_target_update_mode = 0
 
 [node name="PreviewCard" parent="Overlay/CardPreview/SubViewport" unique_id=528451555 instance=ExtResource("3_uf5sv")]
-position = Vector2(256, 456)
-scale = Vector2(4, 4)
+position = Vector2(216, 360)
+scale = Vector2(3, 3)

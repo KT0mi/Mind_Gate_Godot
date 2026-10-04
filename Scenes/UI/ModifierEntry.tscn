@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dvhlswa4tu7bp" path="res://Assets/Images/Test/arrow_icon.png" id="3_r5yos"]
 
 [node name="ModifierEntry" type="Control" unique_id=1061973721]
+custom_minimum_size = Vector2(416, 64)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 416.0
@@ -23,14 +24,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 2
 theme = ExtResource("1_w4vyw")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "Attack Modifier"
 
 [node name="SourceLabel" type="Label" parent="ModifierContainer/NamesContainer" unique_id=1862241573]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("1_w4vyw")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "Card Source"
 horizontal_alignment = 2
 

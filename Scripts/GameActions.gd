@@ -40,8 +40,8 @@ func try_play_card(player: Player, card: CardInstance, lane : int = -1) -> bool:
 				await ZoneManager.move_to(card, Zone.Type.SPELLBOOK, ZoneChangeEvent.Reason.PLAY)
 	
 	#Store turn data
-	TurnController.current_player.match_data.cards_played.append(card)
-	TurnController.current_player.turn_data.cards_played.append(card)
+	player.match_data.cards_played.append(card)
+	player.turn_data.cards_played.append(card)
 	
 	print("GameActions: Resolved try_play_card action sucessfully")
 	await TriggerSystem.emit(Events.PLAY_CARD_RESOLVED, event)
@@ -109,7 +109,7 @@ func draw_cards(player: Player, amount: int, reason : DrawCardEvent.Reason, anim
 			return
 		var card: CardInstance = player.deck.pop_back()
 		await ZoneManager.move_to(card, Zone.Type.HAND, ZoneChangeEvent.Reason.DRAW,-1,anim_group)
-		TurnController.current_player.turn_data.drew_cards = true
+		player.turn_data.drew_cards = true
 	await TriggerSystem.emit(Events.DRAW_CARD_RESOLVED, event)
 
 ## For DURABLE, source-independent modifications only (e.g. a spell that

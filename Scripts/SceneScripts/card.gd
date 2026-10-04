@@ -35,13 +35,13 @@ const HOVER_Z_INDEX := 100
 #Visual Vars
 @onready var sprite: Sprite2D = $Sprite
 @onready var name_label: Label = $Labels/Name/NameLabel
-@onready var stat_label : Label = $Labels/StatLabel/StatLabel
-@onready var gate_label: Label = $Labels/Gate/GateLabel
-@onready var card_text_label: RichTextLabel = $Labels/CardText/CardTextLabel
-@onready var card_back: ColorRect = $CardBack
+@onready var stat_label : Control = $Labels/StatsLabel
+@onready var attack_label : Label = $Labels/StatsLabel/AttackLabel/AttackLabel
+@onready var endurance_label : Label = $Labels/StatsLabel/EnduranceLabel/EnduranceLabel
+@onready var gate_label: Label = $Labels/StatsLabel/Gate/GateLabel
+@onready var card_back: TextureRect = $CardBack
 @onready var hidden_overlay: ColorRect = $HiddenOverlay
 @onready var card_fx: Control = $CardFX
-
 
 var card_instance: CardInstance = null
 
@@ -65,26 +65,24 @@ func _setup_visuals() -> void:
 	var def : CardDefinition = card_instance.definition
 	sprite.texture = def.art
 	if def is SpellCardDefinition:
-		$Labels/StatLabel.visible = false
-	else:
-		$Labels/StatLabel.visible = true
-	$Labels/CardText.visible = false
+		attack_label.visible = false
+		endurance_label.visible = false
+
 
 func _refresh_visuals() -> void:
 	#Fill with visual representation of card instance
 	var def : CardDefinition = card_instance.definition
-	name_label.text = def.card_name
-	#TextHandler.fit_label(name_label, 18, 10)
-	card_text_label.text = card_instance.get_display_text()
+	name_label.text = def.card_name.to_upper()
+	TextHandler.fit_name_label(name_label)
 	gate_label.text = CardViewManager.format_gate_label(card_instance.get_gate())
 	_gated_feedback(card_instance)
 	card_fx.get_active_fx(card_instance)
 	if def is CreatureCardDefinition:
-		stat_label.text = "%d/%d" % [card_instance.get_attack(), card_instance.get_endurance()]
-		#attack_label.text = "%d" % card_instance.get_attack()
+		endurance_label.text = "%d" % card_instance.get_endurance()
+		attack_label.text = "%d" % card_instance.get_attack()
 		
-		#_apply_modified_feedback(attack_label, card_instance.get_attack(), def.attack)
-		#_apply_modified_feedback(endurance_label, card_instance.get_endurance(), def.endurance)
+		_apply_modified_feedback(attack_label, card_instance.get_attack(), def.attack)
+		_apply_modified_feedback(endurance_label, card_instance.get_endurance(), def.endurance)
 	_update_hidden_state()
 
 func _gated_feedback(card : CardInstance) -> void:

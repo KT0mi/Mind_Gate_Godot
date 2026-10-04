@@ -1,6 +1,6 @@
 class_name DeckBuilderCard extends PanelContainer
 
-enum Context {AVAILABLE, DECK}
+enum Context {AVAILABLE, DECK, VIEW}
 
 signal add_requested(id: StringName, add_max: bool)
 signal remove_requested(id: StringName)
@@ -10,9 +10,9 @@ var context : Context = Context.AVAILABLE
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var name_label: Label = $Labels/Name/NameLabel
-@onready var attack_label: Label = $Labels/Attack/AttackLabel
-@onready var endurance_label: Label = $Labels/Endurance/EnduranceLabel
-@onready var gate_label: Label = $Labels/Gate/GateLabel
+@onready var attack_label: Label = $Labels/StatsLabel/AttackLabel/AttackLabel
+@onready var endurance_label: Label = $Labels/StatsLabel/EnduranceLabel/EnduranceLabel
+@onready var gate_label: Label = $Labels/StatsLabel/Gate/GateLabel
 @onready var card_text_label: RichTextLabel = $Labels/CardText/CardTextLabel
 @onready var count_node: Control = $Labels/Count
 @onready var count_label: Label = $Labels/Count/CountLabel
@@ -26,9 +26,8 @@ func _ready() -> void:
 func setup(def: CardDefinition) -> void:
 	definition = def
 	sprite.texture = def.art
-	name_label.text = def.card_name
-	TextHandler.fit_label(name_label, 18, 8)
-	$Labels/CardText.visible = false
+	name_label.text = def.card_name.to_upper()
+	TextHandler.fit_name_label(name_label)
 	gate_label.text = CardViewManager.format_gate_label(def.gate)
 
 	if def is CreatureCardDefinition:
@@ -53,11 +52,14 @@ func refresh_state(count: int, max_copies: int, can_add: bool, can_remove: bool)
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton and event.is_pressed() and context!=Context.VIEW:
 		if event.button_index == MOUSE_BUTTON_LEFT and not add_disabled:
 			add_requested.emit(definition.id, event.shift_pressed)
 			get_viewport().set_input_as_handled()
-		elif event.button_index == MOUSE_BUTTON_RIGHT and not remove_disabled:
+		elif event.button_index == MOUSE_BUTTON_MIDDLE and not remove_disabled:
 			remove_requested.emit(definition.id)
 			get_viewport().set_input_as_handled()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			##CardInspector.open(card_instance)
+			return
 	

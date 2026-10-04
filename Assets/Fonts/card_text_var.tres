@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" format=3 uid="uid://bpm0jymirctqj"]
+
+[ext_resource type="FontFile" uid="uid://xt826s822oof" path="res://Assets/Images/Test/font_new.png" id="1_ajbv5"]
+
+[resource]
+base_font = ExtResource("1_ajbv5")
+spacing_space = -8
+spacing_top = -2

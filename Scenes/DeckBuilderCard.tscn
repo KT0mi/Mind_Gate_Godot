@@ -1,220 +1,208 @@
 [gd_scene format=3 uid="uid://dmy5u0kyobl6s"]
 
 [ext_resource type="Script" uid="uid://d2vhshjsxdw6b" path="res://Scripts/SceneScripts/DeckBuilderCard.gd" id="1_6xgvr"]
-[ext_resource type="Texture2D" uid="uid://rfm4n84le83w" path="res://Assets/Images/Cards/Sprites/fireball.png" id="2_6s5ms"]
-[ext_resource type="Texture2D" uid="uid://dkn0uibqujipt" path="res://Assets/Images/Test/border_1.png" id="3_wjkf1"]
-[ext_resource type="Texture2D" uid="uid://cngvbysyumswh" path="res://Assets/Images/Test/border_element_9slice.png" id="4_rq1h3"]
-[ext_resource type="Theme" uid="uid://bxjx78kc5nbmv" path="res://Theme/default_theme.tres" id="5_1sly5"]
-[ext_resource type="Texture2D" uid="uid://k3hv0wjq3xgp" path="res://Assets/Images/Test/border_element.png" id="6_k3667"]
+[ext_resource type="Texture2D" uid="uid://cdocl0ivlh2ll" path="res://Assets/Images/Cards/Sprites/placeholder.png" id="4_86h68"]
+[ext_resource type="Texture2D" uid="uid://ysa825uqeeyc" path="res://Assets/Images/Test/border_new.png" id="5_6s5ms"]
+[ext_resource type="Theme" uid="uid://bppmoypqx4y1q" path="res://Theme/card_text_theme.tres" id="6_wjkf1"]
+[ext_resource type="Theme" uid="uid://cni0exgih8y2h" path="res://Theme/card_text_small_theme.tres" id="7_rq1h3"]
+[ext_resource type="Texture2D" uid="uid://ca2ecswdphwbf" path="res://Assets/Images/Test/card_back.png" id="8_1sly5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoo26"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xgvr"]
+bg_color = Color(0.85882354, 0.8666667, 0.8862745, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.09803922, 0.09803922, 0.20392157, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 2
 
 [node name="DeckBuilderCard" type="PanelContainer" unique_id=451747793]
-custom_minimum_size = Vector2(128, 228)
+custom_minimum_size = Vector2(144, 240)
+offset_right = 136.0
+offset_bottom = 228.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uoo26")
 script = ExtResource("1_6xgvr")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1779053753]
-scale = Vector2(0.5925926, 0.5925926)
-texture = ExtResource("2_6s5ms")
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1908210033]
+position = Vector2(8, 8)
+texture = ExtResource("4_86h68")
 centered = false
-region_enabled = true
 region_rect = Rect2(3, 2, 211, 381)
 
-[node name="CardBorder" type="Sprite2D" parent="." unique_id=170740293]
-scale = Vector2(0.5925926, 0.5925926)
-texture = ExtResource("3_wjkf1")
-centered = false
+[node name="CardBorder" type="TextureRect" parent="." unique_id=1501664938]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_6s5ms")
+stretch_mode = 2
 
-[node name="Labels" type="Node2D" parent="." unique_id=1298906498]
-position = Vector2(64, 114)
-
-[node name="CardText" type="Control" parent="Labels" unique_id=1068950329]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="CardTextRect" type="NinePatchRect" parent="Labels/CardText" unique_id=1293088534]
-layout_mode = 0
-offset_left = -59.0
-offset_right = 174.19049
-offset_bottom = 178.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_rq1h3")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
-
-[node name="CardTextLabel" type="RichTextLabel" parent="Labels/CardText" unique_id=838028171]
-layout_mode = 0
-offset_left = -57.0
-offset_top = 2.0
-offset_right = 56.0
-offset_bottom = 87.0
-mouse_filter = 2
-theme = ExtResource("5_1sly5")
-bbcode_enabled = true
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec quam erat. Integer aliquam, ex nec lacinia dictum, dui risus tincidunt lacus, at dapibus magna diam sed enim. Donec sodales ligula at molestie vulputate. Donec dapibus lobortis orci, et dapibus erat semper sit amet. Duis sed maximus sem. Fusce in pharetra felis. Morbi congue maximus diam a dapibus. Sed at diam libero. Phasellus eu cursus justo. Sed vulputate lacus non fermentum bibendum. Sed nec lobortis enim. Sed consectetur at tellus ut viverra. Etiam consequat massa sit amet odio accumsan sagittis. Maecenas iaculis at lacus at vulputate"
-scroll_active = false
-
-[node name="Name" type="Control" parent="Labels" unique_id=871133523]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="NameRect" type="NinePatchRect" parent="Labels/Name" unique_id=524885384]
-layout_mode = 0
-offset_left = -59.0
-offset_top = -110.0
-offset_right = 174.19
-offset_bottom = -62.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_rq1h3")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
-
-[node name="NameLabel" type="Label" parent="Labels/Name" unique_id=1762791428]
-layout_mode = 0
-offset_left = -57.0
-offset_top = -110.0
-offset_right = 56.0
-offset_bottom = -85.0
-theme = ExtResource("5_1sly5")
-text = "Card Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="Attack" type="Control" parent="Labels" unique_id=980478003]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -60.0
-offset_top = 90.0
-offset_right = -20.0
-offset_bottom = 130.0
-mouse_filter = 2
-
-[node name="AttackRect" type="TextureRect" parent="Labels/Attack" unique_id=86331905]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_k3667")
-
-[node name="AttackLabel" type="Label" parent="Labels/Attack" unique_id=588477204]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -3.0
-offset_right = 22.0
-offset_bottom = 21.0
-theme = ExtResource("5_1sly5")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Endurance" type="Control" parent="Labels" unique_id=1150958294]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 40.0
-offset_top = 90.0
-offset_right = 80.0
-offset_bottom = 130.0
-mouse_filter = 2
-
-[node name="EnduranceRect" type="TextureRect" parent="Labels/Endurance" unique_id=1233369494]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_k3667")
-
-[node name="EnduranceLabel" type="Label" parent="Labels/Endurance" unique_id=794828416]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -3.0
-offset_right = 22.0
-offset_bottom = 21.0
-theme = ExtResource("5_1sly5")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Gate" type="Control" parent="Labels" unique_id=135431206]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 98.0
-offset_right = 40.0
-offset_bottom = 138.0
-mouse_filter = 2
-
-[node name="GateRect" type="NinePatchRect" parent="Labels/Gate" unique_id=1635803084]
-layout_mode = 0
-offset_left = -27.0
-offset_top = -8.0
-offset_right = 82.19
-offset_bottom = 32.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_rq1h3")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
-
-[node name="GateLabel" type="Label" parent="Labels/Gate" unique_id=354365593]
-layout_mode = 0
-offset_left = -26.0
-offset_top = -11.0
-offset_right = 26.0
-offset_bottom = 12.0
-theme = ExtResource("5_1sly5")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Labels" type="Node2D" parent="." unique_id=1157401145]
 
 [node name="Count" type="Control" parent="Labels" unique_id=1590364148]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 96.0
-offset_top = 2.0
-offset_right = 136.0
-offset_bottom = 42.0
+offset_left = 159.0
+offset_top = 83.0
+offset_right = 220.0
+offset_bottom = 108.0
 mouse_filter = 2
 
-[node name="CountRect" type="NinePatchRect" parent="Labels/Count" unique_id=320486789]
-layout_mode = 0
-offset_left = -27.0
-offset_top = -8.0
-offset_right = 43.0
-offset_bottom = 32.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_rq1h3")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
+[node name="Panel" type="Panel" parent="Labels/Count" unique_id=1119583999]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6xgvr")
 
 [node name="CountLabel" type="Label" parent="Labels/Count" unique_id=338475913]
-layout_mode = 0
-offset_left = -26.0
-offset_top = -11.0
-offset_right = 7.0
-offset_bottom = 12.0
-theme = ExtResource("5_1sly5")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -11.5
+offset_right = 16.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_wjkf1")
 text = "0/0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CardBack" type="ColorRect" parent="." unique_id=428025629]
+[node name="Name" type="Control" parent="Labels" unique_id=1789362971]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 153.0
+offset_right = 135.0
+offset_bottom = 200.0
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Labels/Name" unique_id=151824490]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme = ExtResource("6_wjkf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="StatsLabel" type="Control" parent="Labels" unique_id=1206498263]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 201.0
+offset_right = 135.0
+offset_bottom = 231.0
+
+[node name="Gate" type="Control" parent="Labels/StatsLabel" unique_id=1740679570]
+custom_minimum_size = Vector2(54, 28)
+anchors_preset = 0
+offset_left = 32.0
+offset_right = 94.0
+offset_bottom = 30.0
+mouse_filter = 2
+
+[node name="GateLabel" type="Label" parent="Labels/StatsLabel/Gate" unique_id=1395326820]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_wjkf1")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttackLabel" type="Control" parent="Labels/StatsLabel" unique_id=2064999818]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 31.0
+offset_bottom = 30.0
+mouse_filter = 2
+
+[node name="AttackLabel" type="Label" parent="Labels/StatsLabel/AttackLabel" unique_id=1848019609]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_wjkf1")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnduranceLabel" type="Control" parent="Labels/StatsLabel" unique_id=115580847]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_bottom = 30.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="EnduranceLabel" type="Label" parent="Labels/StatsLabel/EnduranceLabel" unique_id=1330352428]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_wjkf1")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SetLabel" type="Control" parent="Labels" unique_id=292295805]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 136.0
+offset_right = 127.0
+offset_bottom = 152.0
+
+[node name="SetLabel" type="Label" parent="Labels/SetLabel" unique_id=479415467]
+layout_mode = 0
+offset_right = 110.0
+offset_bottom = 16.0
+theme = ExtResource("7_rq1h3")
+text = "THIS IS THE SET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBack" type="TextureRect" parent="." unique_id=1651485466]
 visible = false
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+texture = ExtResource("8_1sly5")
 
-[node name="HiddenOverlay" type="ColorRect" parent="." unique_id=670616284]
+[node name="HiddenOverlay" type="ColorRect" parent="." unique_id=1494936834]
 visible = false
 layout_mode = 2
 mouse_filter = 2

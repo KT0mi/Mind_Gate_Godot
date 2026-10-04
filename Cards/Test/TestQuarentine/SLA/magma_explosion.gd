@@ -10,8 +10,9 @@ func _init() -> void:
 	sets = ["fiery_tradition"]
 
 func get_display_text(instance: CardInstance, _context : bool = false) -> String:
+	var dmg := CardText.dynamic(CheckSystem.effect_damage_of(instance, 1))
 	return "This card counts as a 'Magma Burst' card. Choose any card in the arena: Deal %s+%s damage to it." \
-		% CardText.dynamic(CheckSystem.effect_damage_of(instance, 1))
+		% [dmg,dmg]
 
 func resolve_effect(card: CardInstance, _event: PlayCardEvent) -> void:
 	var candidates := GameState.all_cards_in_arena().duplicate()

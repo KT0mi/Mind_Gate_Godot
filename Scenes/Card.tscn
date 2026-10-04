@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://07qc2b2jhuei"]
 
 [ext_resource type="Script" uid="uid://c22swfodwe5go" path="res://Scripts/SceneScripts/Card.gd" id="1_pnb5n"]
-[ext_resource type="Texture2D" uid="uid://dkn0uibqujipt" path="res://Assets/Images/Test/border_1.png" id="2_3p273"]
-[ext_resource type="Texture2D" uid="uid://rfm4n84le83w" path="res://Assets/Images/Cards/Sprites/fireball.png" id="2_kphy1"]
-[ext_resource type="Texture2D" uid="uid://cngvbysyumswh" path="res://Assets/Images/Test/border_element_9slice.png" id="3_h8wm0"]
-[ext_resource type="Texture2D" uid="uid://k3hv0wjq3xgp" path="res://Assets/Images/Test/border_element.png" id="4_3m7nw"]
-[ext_resource type="Theme" uid="uid://bxjx78kc5nbmv" path="res://Theme/default_theme.tres" id="5_wejov"]
+[ext_resource type="Texture2D" uid="uid://cdocl0ivlh2ll" path="res://Assets/Images/Cards/Sprites/placeholder.png" id="2_wejov"]
+[ext_resource type="Texture2D" uid="uid://ysa825uqeeyc" path="res://Assets/Images/Test/border_new.png" id="3_c6tr3"]
+[ext_resource type="Theme" uid="uid://cni0exgih8y2h" path="res://Theme/card_text_small_theme.tres" id="5_1geux"]
+[ext_resource type="Theme" uid="uid://bppmoypqx4y1q" path="res://Theme/card_text_theme.tres" id="5_13sua"]
+[ext_resource type="Texture2D" uid="uid://ca2ecswdphwbf" path="res://Assets/Images/Test/card_back.png" id="6_1geux"]
 [ext_resource type="Script" uid="uid://cy6tqi2ktdrh2" path="res://Scripts/SceneScripts/CardFX.gd" id="7_1geux"]
 [ext_resource type="Texture2D" uid="uid://dle8j24yssunu" path="res://Assets/Images/FX/dazedfx.png" id="7_c6tr3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8wm0"]
-size = Vector2(128, 228)
+size = Vector2(144, 240)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1geux"]
 atlas = ExtResource("7_c6tr3")
@@ -70,189 +70,170 @@ animations = [{
 }]
 
 [node name="Card" type="Area2D" unique_id=528451555]
+texture_filter = 1
 script = ExtResource("1_pnb5n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=806803082]
 shape = SubResource("RectangleShape2D_h8wm0")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1779053753]
-scale = Vector2(0.5925926, 0.5925926)
-texture = ExtResource("2_kphy1")
-region_enabled = true
+texture = ExtResource("2_wejov")
+offset = Vector2(0, -48)
 region_rect = Rect2(3, 2, 211, 381)
 
-[node name="CardBorder" type="Sprite2D" parent="." unique_id=170740293]
-scale = Vector2(0.5925926, 0.5925926)
-texture = ExtResource("2_3p273")
+[node name="CardBorder" type="TextureRect" parent="." unique_id=1215638373]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 72.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_c6tr3")
+stretch_mode = 2
 
 [node name="Labels" type="Node2D" parent="." unique_id=1298906498]
-
-[node name="CardText" type="Control" parent="Labels" unique_id=1068950329]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="CardTextRect" type="NinePatchRect" parent="Labels/CardText" unique_id=1293088534]
-layout_mode = 0
-offset_left = -59.0
-offset_right = 174.19048
-offset_bottom = 178.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_h8wm0")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
-
-[node name="CardTextLabel" type="RichTextLabel" parent="Labels/CardText" unique_id=838028171]
-layout_mode = 0
-offset_left = -57.0
-offset_top = 2.0
-offset_right = 56.0
-offset_bottom = 87.0
-mouse_filter = 2
-theme = ExtResource("5_wejov")
-theme_override_constants/outline_size = 0
-bbcode_enabled = true
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec quam erat. Integer aliquam, ex nec lacinia dictum, dui risus tincidunt lacus, at dapibus magna diam sed enim. Donec sodales ligula at molestie vulputate. Donec dapibus lobortis orci, et dapibus erat semper sit amet. Duis sed maximus sem. Fusce in pharetra felis. Morbi congue maximus diam a dapibus. Sed at diam libero. Phasellus eu cursus justo. Sed vulputate lacus non fermentum bibendum. Sed nec lobortis enim. Sed consectetur at tellus ut viverra. Etiam consequat massa sit amet odio accumsan sagittis. Maecenas iaculis at lacus at vulputate"
-scroll_active = false
+position = Vector2(-72, -120)
 
 [node name="Name" type="Control" parent="Labels" unique_id=871133523]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 9.0
+offset_top = 153.0
+offset_right = 135.0
+offset_bottom = 200.0
 mouse_filter = 2
-
-[node name="NameRect" type="NinePatchRect" parent="Labels/Name" unique_id=524885384]
-layout_mode = 0
-offset_left = -59.0
-offset_top = -110.0
-offset_right = 174.19
-offset_bottom = -62.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_h8wm0")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
 
 [node name="NameLabel" type="Label" parent="Labels/Name" unique_id=1762791428]
+texture_filter = 1
 layout_mode = 0
-offset_left = -57.0
-offset_top = -110.0
-offset_right = 56.0
-offset_bottom = -88.0
-theme = ExtResource("5_wejov")
-text = "Card Name"
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme = ExtResource("5_13sua")
+text = "card name"
 horizontal_alignment = 1
-vertical_alignment = 2
-autowrap_mode = 3
+vertical_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 3
+uppercase = true
 
-[node name="Attack" type="Control" parent="Labels" unique_id=980478003]
+[node name="StatsLabel" type="Control" parent="Labels" unique_id=1588772029]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -60.0
-offset_top = 90.0
-offset_right = -20.0
-offset_bottom = 130.0
+offset_left = 9.0
+offset_top = 201.0
+offset_right = 135.0
+offset_bottom = 231.0
+
+[node name="Gate" type="Control" parent="Labels/StatsLabel" unique_id=135431206]
+custom_minimum_size = Vector2(54, 28)
+anchors_preset = 0
+offset_left = 32.0
+offset_right = 94.0
+offset_bottom = 30.0
 mouse_filter = 2
 
-[node name="AttackRect" type="TextureRect" parent="Labels/Attack" unique_id=86331905]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_3m7nw")
-
-[node name="AttackLabel" type="Label" parent="Labels/Attack" unique_id=588477204]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 19.0
-offset_bottom = 19.0
-theme = ExtResource("5_wejov")
+[node name="GateLabel" type="Label" parent="Labels/StatsLabel/Gate" unique_id=354365593]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_13sua")
 text = "0"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
-[node name="Endurance" type="Control" parent="Labels" unique_id=1150958294]
+[node name="AttackLabel" type="Control" parent="Labels/StatsLabel" unique_id=980478003]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 31.0
+offset_bottom = 30.0
+mouse_filter = 2
+
+[node name="AttackLabel" type="Label" parent="Labels/StatsLabel/AttackLabel" unique_id=588477204]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_13sua")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnduranceLabel" type="Control" parent="Labels/StatsLabel" unique_id=1930022713]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_bottom = 30.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="EnduranceLabel" type="Label" parent="Labels/StatsLabel/EnduranceLabel" unique_id=1431879429]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_13sua")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SetLabel" type="Control" parent="Labels" unique_id=775448265]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 40.0
-offset_top = 90.0
-offset_right = 80.0
-offset_bottom = 130.0
-mouse_filter = 2
+offset_left = 17.0
+offset_top = 136.0
+offset_right = 127.0
+offset_bottom = 152.0
 
-[node name="EnduranceRect" type="TextureRect" parent="Labels/Endurance" unique_id=1233369494]
+[node name="SetLabel" type="Label" parent="Labels/SetLabel" unique_id=1062445688]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_3m7nw")
-
-[node name="EnduranceLabel" type="Label" parent="Labels/Endurance" unique_id=794828416]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 20.0
-offset_bottom = 19.0
-theme = ExtResource("5_wejov")
-text = "0"
+offset_right = 110.0
+offset_bottom = 16.0
+theme = ExtResource("5_1geux")
+text = "THIS IS THE SET"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
-[node name="Gate" type="Control" parent="Labels" unique_id=135431206]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 98.0
-offset_right = 40.0
-offset_bottom = 138.0
-mouse_filter = 2
-
-[node name="GateRect" type="NinePatchRect" parent="Labels/Gate" unique_id=1635803084]
-layout_mode = 0
-offset_left = -27.0
-offset_top = -8.0
-offset_right = 82.19
-offset_bottom = 32.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_h8wm0")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
-
-[node name="GateLabel" type="Label" parent="Labels/Gate" unique_id=354365593]
-layout_mode = 0
-offset_left = -25.0
-offset_top = -6.0
-offset_right = 26.0
-offset_bottom = 12.0
-theme = ExtResource("5_wejov")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="CardBack" type="ColorRect" parent="." unique_id=428025629]
+[node name="CardBack" type="TextureRect" parent="." unique_id=906070420]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -114.0
-offset_right = 64.0
-offset_bottom = 114.0
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 72.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
-color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+texture = ExtResource("6_1geux")
 
 [node name="HiddenOverlay" type="ColorRect" parent="." unique_id=670616284]
 visible = false
@@ -261,10 +242,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -112.0
-offset_right = 64.0
-offset_bottom = 112.0
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 72.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -272,14 +253,18 @@ color = Color(0, 0, 0, 0.29411766)
 
 [node name="CardFX" type="Control" parent="." unique_id=1782149620]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_1geux")
 
 [node name="DazedFX" type="AnimatedSprite2D" parent="CardFX" unique_id=357338642]
 visible = false
-position = Vector2(83, -134)
+position = Vector2(104, -152)
 sprite_frames = SubResource("SpriteFrames_co2vc")
 frame_progress = 0.00013755013

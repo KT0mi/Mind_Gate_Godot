@@ -2,21 +2,21 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://2v8vmh755jil"
-path="res://.godot/imported/Minecraft.ttf-5f6638f398155e2f47c5ecdd9b344f48.fontdata"
+uid="uid://cpt6h1wf50aq3"
+path="res://.godot/imported/Card_Stat_Name_Font_0_2.otf-96dcfdbd6416ed7162d83626e6230c00.fontdata"
 
 [deps]
 
-source_file="res://Assets/Fonts/Minecraft.ttf"
-dest_files=["res://.godot/imported/Minecraft.ttf-5f6638f398155e2f47c5ecdd9b344f48.fontdata"]
+source_file="res://Assets/Fonts/Card_Stat_Name_Font_0_2.otf"
+dest_files=["res://.godot/imported/Card_Stat_Name_Font_0_2.otf-96dcfdbd6416ed7162d83626e6230c00.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
-multichannel_signed_distance_field=true
+multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
@@ -30,7 +30,12 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
 language_support={}
 script_support={}
 opentype_features={}

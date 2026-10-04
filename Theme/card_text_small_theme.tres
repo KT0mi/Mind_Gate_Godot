@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3 uid="uid://cni0exgih8y2h"]
+
+[ext_resource type="FontVariation" uid="uid://daqcgf2pltuv8" path="res://Assets/Fonts/card_text_small_var.tres" id="1_37lbk"]
+
+[resource]
+Label/colors/font_color = Color(0.26741004, 0.2301, 0.39, 1)
+Label/constants/line_spacing = 8
+Label/font_sizes/font_size = 11
+Label/fonts/font = ExtResource("1_37lbk")
