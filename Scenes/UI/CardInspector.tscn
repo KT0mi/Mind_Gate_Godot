@@ -5,18 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://m2ppxj3bxj07" path="res://Scenes/UI/ModifierEntry.tscn" id="3_ggrrv"]
 [ext_resource type="PackedScene" uid="uid://07qc2b2jhuei" path="res://Scenes/Card.tscn" id="3_uf5sv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggrrv"]
-bg_color = Color(0.85882354, 0.8666667, 0.8862745, 1)
-border_width_left = 12
-border_width_top = 12
-border_width_right = 12
-border_width_bottom = 12
-border_color = Color(0.09803922, 0.09803922, 0.20392157, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
 [node name="CardInspector" type="CanvasLayer" unique_id=1817531272]
 script = ExtResource("1_0nlpk")
 
@@ -67,7 +55,7 @@ offset_right = -192.0
 offset_bottom = -152.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ggrrv")
+theme = ExtResource("2_fxm2w")
 
 [node name="CardZoneContainer" type="ScrollContainer" parent="ZoneInspector" unique_id=55040339]
 layout_mode = 0
@@ -80,7 +68,7 @@ horizontal_scroll_mode = 0
 [node name="CardsContainer" type="GridContainer" parent="ZoneInspector/CardZoneContainer" unique_id=758764791]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-columns = 11
+columns = 10
 
 [node name="Overlay" type="Control" parent="." unique_id=1566470372]
 visible = false

@@ -3,6 +3,8 @@
 [ext_resource type="FontFile" uid="uid://2v8vmh755jil" path="res://Assets/Fonts/Minecraft.ttf" id="1_t8nia"]
 [ext_resource type="Texture2D" uid="uid://di877yfvjayjt" path="res://Assets/Images/UI/default_theme/4button_normal.png" id="2_u1xyr"]
 [ext_resource type="Texture2D" uid="uid://cnum1rhkt2pua" path="res://Assets/Images/UI/default_theme/4button_pressed.png" id="3_ipf01"]
+[ext_resource type="FontVariation" uid="uid://daqcgf2pltuv8" path="res://Assets/Fonts/card_text_small_var.tres" id="4_2hahr"]
+[ext_resource type="Texture2D" uid="uid://16j3vnp41wuf" path="res://Assets/Images/UI/panel_nine_rect_.png" id="4_ipf01"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2hahr"]
 texture = ExtResource("2_u1xyr")
@@ -24,6 +26,20 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 region_rect = Rect2(0, 0, 64, 64)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ipf01"]
+texture = ExtResource("2_u1xyr")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cgfvn"]
+texture = ExtResource("4_ipf01")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
 [sub_resource type="SystemFont" id="SystemFont_kphy1"]
 
 [resource]
@@ -33,7 +49,7 @@ Button/colors/font_hover_color = Color(1, 0.7607843, 0.9372549, 1)
 Button/colors/font_pressed_color = Color(0.39607844, 0.2901961, 0.5411765, 1)
 Button/colors/icon_normal_color = Color(1, 0.8901961, 0.9843137, 1)
 Button/font_sizes/font_size = 34
-Button/fonts/font = ExtResource("1_t8nia")
+Button/fonts/font = ExtResource("4_2hahr")
 Button/styles/hover = SubResource("StyleBoxTexture_2hahr")
 Button/styles/normal = SubResource("StyleBoxTexture_2hahr")
 Button/styles/pressed = SubResource("StyleBoxTexture_r3a2t")
@@ -41,7 +57,10 @@ Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 2
-Label/fonts/font = ExtResource("1_t8nia")
+Label/fonts/font = ExtResource("4_2hahr")
+LineEdit/fonts/font = ExtResource("4_2hahr")
+LineEdit/styles/normal = SubResource("StyleBoxTexture_ipf01")
+Panel/styles/panel = SubResource("StyleBoxTexture_cgfvn")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 2

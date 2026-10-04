@@ -1,5 +1,4 @@
-class_name Card 
-extends Area2D
+class_name Card extends Area2D
 
 signal picked_up(card: Card)
 signal dropped(card: Card)
@@ -160,7 +159,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	if not event.is_pressed():
 		return
 	
-	if event.button_index == MOUSE_BUTTON_RIGHT:
+	if event.button_index == MOUSE_BUTTON_MIDDLE:
 		CardInspector.open(card_instance)
 		return
 	

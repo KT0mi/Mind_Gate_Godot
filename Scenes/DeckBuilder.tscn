@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bxjx78kc5nbmv" path="res://Theme/default_theme.tres" id="1_3sf4w"]
 [ext_resource type="Script" uid="uid://diqby4l42ot5k" path="res://Scripts/SceneScripts/DeckBuilderController.gd" id="1_7t3uy"]
+[ext_resource type="Theme" uid="uid://cni0exgih8y2h" path="res://Theme/card_text_small_theme.tres" id="3_n4j8u"]
 [ext_resource type="PackedScene" uid="uid://xwojdvdygonc" path="res://Scenes/UI/PixelNoiseBackground.tscn" id="3_nalej"]
 
 [node name="DeckBuilder" type="Control" unique_id=333503037]
@@ -37,31 +38,34 @@ size_flags_horizontal = 3
 
 [node name="DeckNameEdit" type="LineEdit" parent="." unique_id=598020999]
 layout_mode = 0
-offset_left = 1536.0
+offset_left = 1472.0
 offset_top = 32.0
-offset_right = 1760.0
-offset_bottom = 91.0
+offset_right = 1728.0
+offset_bottom = 96.0
 theme = ExtResource("1_3sf4w")
 placeholder_text = "Deck Name"
 
 [node name="SaveButton" type="Button" parent="." unique_id=1211344844]
 layout_mode = 0
-offset_left = 1408.0
+offset_left = 1344.0
 offset_top = 32.0
-offset_right = 1499.0
-offset_bottom = 91.0
+offset_right = 1440.0
+offset_bottom = 96.0
+theme = ExtResource("1_3sf4w")
 theme_override_font_sizes/font_size = 19
 text = "Save"
 
 [node name="CountLabel" type="Label" parent="." unique_id=445470909]
 layout_mode = 0
-offset_left = 1792.0
+offset_left = 1760.0
 offset_top = 32.0
-offset_right = 1883.0
-offset_bottom = 91.0
-theme = ExtResource("1_3sf4w")
+offset_right = 1880.0
+offset_bottom = 96.0
+theme = ExtResource("3_n4j8u")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 43
 text = "0/60"
+vertical_alignment = 1
 
 [node name="BackButton" type="Button" parent="." unique_id=1715374325]
 layout_mode = 0
@@ -69,6 +73,7 @@ offset_left = 64.0
 offset_top = 32.0
 offset_right = 155.0
 offset_bottom = 91.0
+theme = ExtResource("1_3sf4w")
 theme_override_font_sizes/font_size = 19
 text = "Back"
 

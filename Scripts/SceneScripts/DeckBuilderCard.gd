@@ -13,7 +13,6 @@ var context : Context = Context.AVAILABLE
 @onready var attack_label: Label = $Labels/StatsLabel/AttackLabel/AttackLabel
 @onready var endurance_label: Label = $Labels/StatsLabel/EnduranceLabel/EnduranceLabel
 @onready var gate_label: Label = $Labels/StatsLabel/Gate/GateLabel
-@onready var card_text_label: RichTextLabel = $Labels/CardText/CardTextLabel
 @onready var count_node: Control = $Labels/Count
 @onready var count_label: Label = $Labels/Count/CountLabel
 @onready var hidden_overlay: ColorRect = $HiddenOverlay
@@ -56,10 +55,9 @@ func _on_gui_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and not add_disabled:
 			add_requested.emit(definition.id, event.shift_pressed)
 			get_viewport().set_input_as_handled()
-		elif event.button_index == MOUSE_BUTTON_MIDDLE and not remove_disabled:
+		elif event.button_index == MOUSE_BUTTON_RIGHT and not remove_disabled:
 			remove_requested.emit(definition.id)
 			get_viewport().set_input_as_handled()
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			##CardInspector.open(card_instance)
-			return
-	
+		elif event.button_index == MOUSE_BUTTON_MIDDLE:
+			CardInspector.open_definition(definition)
+			get_viewport().set_input_as_handled()

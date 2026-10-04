@@ -25,6 +25,7 @@ var DEFAULT_THEME : Theme = preload("res://Theme/default_theme.tres")
 const MODIFIER_ENTRY_SCENE := preload("res://Scenes/UI/ModifierEntry.tscn")
 
 var _card : CardInstance = null
+var _is_definition_preview: bool = false
 
 func _ready() -> void:
 	layer = 90
@@ -42,6 +43,19 @@ func open(card: CardInstance) -> void:
 		return open_zone_inspector(card)
 	if CardViewManager.is_card_hidden_from_local_view(card): return
 	_card = card
+	_refresh()
+	_overlay.visible = true
+	_hide_hover_context()
+	HoverHandler.force_unfocus()
+
+## For places with no live card (deck builder, collection, etc.)
+func open_definition(def: CardDefinition) -> void:
+	if def == null: return
+	# Throwaway instance: never added to any zone array, so it can't affect the game.
+	var dummy := CardInstance.new(def, GameState.player_one)
+	dummy.current_zone = Zone.Type.ARENA  # see note below
+	_is_definition_preview = true
+	_card = dummy
 	_refresh()
 	_overlay.visible = true
 	_hide_hover_context()
@@ -158,7 +172,9 @@ func _refresh() -> void:
 	
 	_gate_label.text = "Gate:\n%s" % CardViewManager.format_gate_label(_card.get_gate())
 	
-	_rebuild_modifiers_list()
+	_modifiers_list.visible = not _is_definition_preview
+	if not _is_definition_preview:
+		_rebuild_modifiers_list()
 
 func _rebuild_modifiers_list() -> void:
 	for child in _modifiers_list.get_children():

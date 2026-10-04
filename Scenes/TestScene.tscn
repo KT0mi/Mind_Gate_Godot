@@ -9,20 +9,14 @@
 [ext_resource type="Theme" uid="uid://bxjx78kc5nbmv" path="res://Theme/default_theme.tres" id="7_c264a"]
 [ext_resource type="Script" uid="uid://7e36rpp5kkvu" path="res://Scripts/SceneScripts/UIController.gd" id="7_lp1f3"]
 [ext_resource type="Script" uid="uid://c7ay7pp3cjyya" path="res://Scripts/SceneScripts/ChoicePresenter.gd" id="8_6xh1p"]
+[ext_resource type="Theme" uid="uid://cni0exgih8y2h" path="res://Theme/card_text_small_theme.tres" id="8_p30di"]
 [ext_resource type="PackedScene" uid="uid://xwojdvdygonc" path="res://Scenes/UI/PixelNoiseBackground.tscn" id="9_5rbs6"]
 [ext_resource type="Texture2D" uid="uid://cdeudy7g22c8j" path="res://Assets/Images/UI/phase_labels/start_phase.png" id="10_t2vuu"]
 [ext_resource type="Texture2D" uid="uid://kuhyoe6qdbe7" path="res://Assets/Images/UI/phase_labels/draw_phase.png" id="11_lp1f3"]
 [ext_resource type="Texture2D" uid="uid://x661qm7ucoij" path="res://Assets/Images/UI/phase_labels/play_phase.png" id="12_p30di"]
 [ext_resource type="Texture2D" uid="uid://5wafa03mwrhs" path="res://Assets/Images/UI/phase_labels/battle_phase.png" id="13_8c81w"]
 [ext_resource type="Texture2D" uid="uid://dsuucvgtjfyh0" path="res://Assets/Images/UI/phase_labels/end_phase.png" id="14_fi7j4"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_0f5h7"]
-font_size = 200
-font_color = Color(1, 0, 0, 1)
-outline_size = 50
-outline_color = Color(0, 0, 0, 1)
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(25.345, 17.525)
+[ext_resource type="Texture2D" uid="uid://dt53pka3bhevp" path="res://Assets/Images/Test/splash_ui.png" id="17_8c81w"]
 
 [sub_resource type="Animation" id="Animation_4v62a"]
 resource_name = "PhaseLabelTransition"
@@ -90,13 +84,18 @@ script = ExtResource("1_5lt6y")
 player_one_deck = ExtResource("2_c264a")
 player_two_deck = ExtResource("2_qsjrb")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2081387922]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("17_8c81w")
+
 [node name="P1Deck" parent="." unique_id=2121250337 instance=ExtResource("2_8k7wh")]
-position = Vector2(1728, 912)
+position = Vector2(1696, 224)
 capacity = -1
 zone_type = 2
 
 [node name="P1PlayerZone" parent="." unique_id=2061988723 instance=ExtResource("2_8k7wh")]
-position = Vector2(448, 624)
+position = Vector2(544, 576)
 zone_type = 4
 
 [node name="P1Hand" parent="." unique_id=510289264 instance=ExtResource("2_8k7wh")]
@@ -108,62 +107,62 @@ card_spacing = 90.0
 fan_angle_step_degrees = 7.0
 
 [node name="P1Arena1" parent="." unique_id=262156364 instance=ExtResource("3_8k7wh")]
-position = Vector2(815, 624)
+position = Vector2(800, 576)
 lane_index = 0
 card_spacing = 145.0
 
 [node name="P1Arena2" parent="." unique_id=1393727378 instance=ExtResource("3_8k7wh")]
-position = Vector2(960, 624)
+position = Vector2(945, 576)
 lane_index = 1
 card_spacing = 145.0
 
 [node name="P1Arena3" parent="." unique_id=1701242267 instance=ExtResource("3_8k7wh")]
-position = Vector2(1105, 624)
+position = Vector2(1090, 576)
 lane_index = 2
 card_spacing = 145.0
 
 [node name="P1Graveyard" parent="." unique_id=1817713873 instance=ExtResource("2_8k7wh")]
-position = Vector2(1536, 912)
+position = Vector2(1696, 544)
 capacity = -1
 zone_type = 3
 
 [node name="P1SpellBook" parent="." unique_id=216035090 instance=ExtResource("5_0f5h7")]
-position = Vector2(1536, 624)
+position = Vector2(1248, 576)
 
 [node name="P2Arena1" parent="." unique_id=1267337120 instance=ExtResource("3_8k7wh")]
-position = Vector2(815, 400)
+position = Vector2(800, 352)
 rotation = -6.2831855
 owner_is_player_one = false
 lane_index = 0
 card_spacing = 145.0
 
 [node name="P2Arena2" parent="." unique_id=1133478785 instance=ExtResource("3_8k7wh")]
-position = Vector2(960, 400)
+position = Vector2(945, 352)
 rotation = -6.2831855
 owner_is_player_one = false
 lane_index = 1
 card_spacing = 145.0
 
 [node name="P2Arena3" parent="." unique_id=743617396 instance=ExtResource("3_8k7wh")]
-position = Vector2(1105, 400)
+position = Vector2(1090, 352)
 rotation = -6.2831855
 owner_is_player_one = false
 lane_index = 2
 card_spacing = 145.0
 
 [node name="P2Deck" parent="." unique_id=498374642 instance=ExtResource("2_8k7wh")]
-position = Vector2(1728, 144)
+position = Vector2(1408, 0)
 capacity = -1
 owner_is_player_one = false
 zone_type = 2
 
 [node name="P2PlayerZone" parent="." unique_id=1116025579 instance=ExtResource("2_8k7wh")]
-position = Vector2(448, 400)
+position = Vector2(544, 352)
 owner_is_player_one = false
 zone_type = 4
 
 [node name="P2Hand" parent="." unique_id=1733684403 instance=ExtResource("2_8k7wh")]
-position = Vector2(960, 112)
+position = Vector2(960, 0)
 rotation = 3.1415927
 capacity = -1
 owner_is_player_one = false
@@ -173,13 +172,13 @@ card_spacing = 90.0
 fan_angle_step_degrees = 7.0
 
 [node name="P2Graveyard" parent="." unique_id=796521439 instance=ExtResource("2_8k7wh")]
-position = Vector2(1536, 144)
+position = Vector2(1216, 0)
 capacity = -1
 owner_is_player_one = false
 zone_type = 3
 
 [node name="P2SpellBook2" parent="." unique_id=406898785 instance=ExtResource("5_0f5h7")]
-position = Vector2(1536, 400)
+position = Vector2(1248, 352)
 owner_is_player_one = false
 
 [node name="UI" type="Control" parent="." unique_id=392019201]
@@ -194,8 +193,13 @@ visible = false
 layout_mode = 0
 offset_right = 1918.0
 offset_bottom = 1082.0
+theme = ExtResource("8_p30di")
+theme_override_colors/font_color = Color(0.9389541, 4.5724214e-06, 1.540184e-06, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 20
+theme_override_constants/shadow_offset_y = 20
+theme_override_font_sizes/font_size = 162
 text = "Game End Label"
-label_settings = SubResource("LabelSettings_0f5h7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -224,11 +228,12 @@ offset_bottom = 40.0
 script = ExtResource("8_6xh1p")
 
 [node name="ChoiceLabelContainer" type="VBoxContainer" parent="UI/ChoicePresenter" unique_id=1696683618]
+custom_minimum_size = Vector2(480, 0)
 layout_mode = 0
 offset_left = 32.0
 offset_top = 768.0
-offset_right = 374.0
-offset_bottom = 837.0
+offset_right = 512.0
+offset_bottom = 900.0
 mouse_filter = 2
 
 [node name="PromptLabel" type="Label" parent="UI/ChoicePresenter/ChoiceLabelContainer" unique_id=458327305]
@@ -236,6 +241,7 @@ layout_mode = 2
 theme = ExtResource("7_c264a")
 theme_override_font_sizes/font_size = 28
 text = "CHOICE REQUEST LABEL"
+autowrap_mode = 3
 
 [node name="SelectionLabel" type="Label" parent="UI/ChoicePresenter/ChoiceLabelContainer" unique_id=9317734]
 layout_mode = 2

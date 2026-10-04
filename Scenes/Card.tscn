@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://07qc2b2jhuei"]
 
-[ext_resource type="Script" uid="uid://c22swfodwe5go" path="res://Scripts/SceneScripts/Card.gd" id="1_pnb5n"]
+[ext_resource type="Script" uid="uid://c4d8orwatsxay" path="res://Scripts/SceneScripts/Card.gd" id="1_pnb5n"]
 [ext_resource type="Texture2D" uid="uid://cdocl0ivlh2ll" path="res://Assets/Images/Cards/Sprites/placeholder.png" id="2_wejov"]
 [ext_resource type="Texture2D" uid="uid://ysa825uqeeyc" path="res://Assets/Images/Test/border_new.png" id="3_c6tr3"]
 [ext_resource type="Theme" uid="uid://cni0exgih8y2h" path="res://Theme/card_text_small_theme.tres" id="5_1geux"]
@@ -131,6 +131,7 @@ offset_left = 9.0
 offset_top = 201.0
 offset_right = 135.0
 offset_bottom = 231.0
+mouse_filter = 2
 
 [node name="Gate" type="Control" parent="Labels/StatsLabel" unique_id=135431206]
 custom_minimum_size = Vector2(54, 28)
@@ -208,6 +209,7 @@ offset_left = 17.0
 offset_top = 136.0
 offset_right = 127.0
 offset_bottom = 152.0
+mouse_filter = 2
 
 [node name="SetLabel" type="Label" parent="Labels/SetLabel" unique_id=1062445688]
 layout_mode = 0

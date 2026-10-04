@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d2vhshjsxdw6b" path="res://Scripts/SceneScripts/DeckBuilderCard.gd" id="1_6xgvr"]
 [ext_resource type="Texture2D" uid="uid://cdocl0ivlh2ll" path="res://Assets/Images/Cards/Sprites/placeholder.png" id="4_86h68"]
+[ext_resource type="Theme" uid="uid://bxjx78kc5nbmv" path="res://Theme/default_theme.tres" id="4_uoo26"]
 [ext_resource type="Texture2D" uid="uid://ysa825uqeeyc" path="res://Assets/Images/Test/border_new.png" id="5_6s5ms"]
 [ext_resource type="Theme" uid="uid://bppmoypqx4y1q" path="res://Theme/card_text_theme.tres" id="6_wjkf1"]
 [ext_resource type="Theme" uid="uid://cni0exgih8y2h" path="res://Theme/card_text_small_theme.tres" id="7_rq1h3"]
@@ -9,19 +10,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoo26"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xgvr"]
-bg_color = Color(0.85882354, 0.8666667, 0.8862745, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.09803922, 0.09803922, 0.20392157, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 2
 
 [node name="DeckBuilderCard" type="PanelContainer" unique_id=451747793]
 custom_minimum_size = Vector2(144, 240)
@@ -48,9 +36,9 @@ stretch_mode = 2
 layout_mode = 3
 anchors_preset = 0
 offset_left = 159.0
-offset_top = 83.0
+offset_top = 104.0
 offset_right = 220.0
-offset_bottom = 108.0
+offset_bottom = 129.0
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="Labels/Count" unique_id=1119583999]
@@ -60,7 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_6xgvr")
+theme = ExtResource("4_uoo26")
 
 [node name="CountLabel" type="Label" parent="Labels/Count" unique_id=338475913]
 layout_mode = 1
@@ -97,6 +85,7 @@ offset_top = 1.0
 offset_right = 125.0
 offset_bottom = 46.0
 theme = ExtResource("6_wjkf1")
+text = "CARD NAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2

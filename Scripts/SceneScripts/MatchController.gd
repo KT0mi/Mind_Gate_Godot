@@ -141,10 +141,10 @@ func _refresh_ui() -> void:
 func _game_end(losing_player : Player) -> void:
 	if losing_player != GameState.local_player:
 		game_end_label.text = "You Win!"
-		game_end_label.label_settings.font_color = Color.GREEN
+		game_end_label.add_theme_color_override("font_color", Color.GREEN)
 	else:
 		game_end_label.text = "You Lose!"
-		game_end_label.label_settings.font_color = Color.RED
+		game_end_label.add_theme_color_override("font_color", Color.RED)
 	
 	game_end_label.visible = true
 
