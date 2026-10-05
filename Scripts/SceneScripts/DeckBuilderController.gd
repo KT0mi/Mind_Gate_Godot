@@ -50,7 +50,7 @@ func _populate_available() -> void:
 		var flow := _add_flow_row(available_list)
 		for def in grouped[set_id]:
 			var entry := _instantiate_entry(flow, def, DeckBuilderCard.Context.AVAILABLE)
-			entry.add_requested.connect(_on_add)
+			entry.on_left_click.connect(_on_add)
 			_available_entries[def.id] = entry
 			_refresh_entry(def.id)
 			HoverHandler.register_hover(entry)
@@ -119,7 +119,7 @@ func _on_add(id: StringName, add_max: bool = false) -> void:
 		if def.is_special:
 			_refresh_all_special_entries()
 
-func _on_remove(id: StringName) -> void:
+func _on_remove(id: StringName, _shift_pressed: bool) -> void:
 	var def := CardDatabase.get_definition(id)
 	var count: int = working_deck.get(id, 0)
 	if count <= 0:
@@ -152,7 +152,7 @@ func _refresh_entry(id: StringName) -> void:
 
 	if count > 0 and not _deck_entries.has(id):
 		var entry := _instantiate_entry(deck_list, def, DeckBuilderCard.Context.DECK)
-		entry.remove_requested.connect(_on_remove)
+		entry.on_right_click.connect(_on_remove)
 		HoverHandler.register_hover(entry)
 		_deck_entries[id] = entry
 	elif count == 0 and _deck_entries.has(id):

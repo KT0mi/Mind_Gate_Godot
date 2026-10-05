@@ -48,6 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("4_uoo26")
 
 [node name="CountLabel" type="Label" parent="Labels/Count" unique_id=338475913]
@@ -98,6 +99,7 @@ offset_left = 9.0
 offset_top = 201.0
 offset_right = 135.0
 offset_bottom = 231.0
+mouse_filter = 2
 
 [node name="Gate" type="Control" parent="Labels/StatsLabel" unique_id=1740679570]
 custom_minimum_size = Vector2(54, 28)
@@ -175,15 +177,18 @@ offset_left = 17.0
 offset_top = 136.0
 offset_right = 127.0
 offset_bottom = 152.0
+mouse_filter = 2
 
 [node name="SetLabel" type="Label" parent="Labels/SetLabel" unique_id=479415467]
 layout_mode = 0
 offset_right = 110.0
 offset_bottom = 16.0
 theme = ExtResource("7_rq1h3")
-text = "THIS IS THE SET"
+theme_override_constants/line_spacing = 0
+text = "THIS IS THE SET THIS IS THE SET"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="CardBack" type="TextureRect" parent="." unique_id=1651485466]
 visible = false

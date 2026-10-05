@@ -6,8 +6,6 @@ const CARD_SCENE := preload("res://Scenes/DeckBuilderCard.tscn")
 @onready var _cards_container : GridContainer = $ZoneInspector/CardZoneContainer/CardsContainer
 @onready var _zone_inspector_dim_background: ColorRect = $ZoneInspector/DimBackground
 
-@onready var _persistent_text_box : RichTextLabel = $PersistCardText
-
 @onready var _overlay: Control = $Overlay
 @onready var _dim_background: ColorRect = $Overlay/DimBackground
 
@@ -31,11 +29,8 @@ func _ready() -> void:
 	layer = 90
 	_zone_inspector.visible = false
 	_overlay.visible = false
-	_persistent_text_box.visible = false
-	_persistent_text_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_dim_background.gui_input.connect(_on_dim_background_input)
 	_zone_inspector_dim_background.gui_input.connect(_on_dim_background_input)
-	HoverHandler.hover_source_changed.connect(_on_hover_source_changed)
 
 func open(card: CardInstance) -> void:
 	if card == null: return
@@ -45,7 +40,6 @@ func open(card: CardInstance) -> void:
 	_card = card
 	_refresh()
 	_overlay.visible = true
-	_hide_hover_context()
 	HoverHandler.force_unfocus()
 
 ## For places with no live card (deck builder, collection, etc.)
@@ -58,7 +52,6 @@ func open_definition(def: CardDefinition) -> void:
 	_card = dummy
 	_refresh()
 	_overlay.visible = true
-	_hide_hover_context()
 	HoverHandler.force_unfocus()
 
 func close() -> void:
@@ -113,40 +106,6 @@ func _instantiate_entry(parent: Node, def: CardDefinition) -> DeckBuilderCard:
 	entry.set_context(DeckBuilderCard.Context.VIEW)
 	return entry
 
-
-## --- Hover context (persistent, lightweight inspect)
-func _on_hover_source_changed(source: Node) -> void:
-	if is_open() or source == null:
-		_hide_hover_context()
-		return
-	if source is Card:
-		_show_hover_instance(source.card_instance)
-	elif source is DeckBuilderCard:
-		_show_hover_definition(source.definition)
-	else:
-		_hide_hover_context()
-
-func _show_hover_instance(card: CardInstance) -> void:
-	if card == null:
-		_hide_hover_context()
-		return
-	if CardViewManager.is_card_hidden_from_local_view(card) and not DebugSettings.reveal_hidden_cards:
-		_hide_hover_context()
-		return
-	_show_hover_text(card.get_display_text(true))
-
-func _show_hover_definition(def: CardDefinition) -> void:
-	if def == null:
-		_hide_hover_context()
-		return
-	_show_hover_text(def.get_display_text(CardInstance.new(def, null), true))
-
-func _show_hover_text(text: String) -> void:
-	_persistent_text_box.text = text
-	_persistent_text_box.visible = text != ""
-
-func _hide_hover_context() -> void:
-	_persistent_text_box.visible = false
 
 ## --- Populating
 

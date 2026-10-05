@@ -216,9 +216,11 @@ layout_mode = 0
 offset_right = 110.0
 offset_bottom = 16.0
 theme = ExtResource("5_1geux")
+theme_override_constants/line_spacing = 0
 text = "THIS IS THE SET"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="CardBack" type="TextureRect" parent="." unique_id=906070420]
 visible = false

@@ -38,6 +38,7 @@ const HOVER_Z_INDEX := 100
 @onready var attack_label : Label = $Labels/StatsLabel/AttackLabel/AttackLabel
 @onready var endurance_label : Label = $Labels/StatsLabel/EnduranceLabel/EnduranceLabel
 @onready var gate_label: Label = $Labels/StatsLabel/Gate/GateLabel
+@onready var set_label: Label = $Labels/SetLabel/SetLabel
 @onready var card_back: TextureRect = $CardBack
 @onready var hidden_overlay: ColorRect = $HiddenOverlay
 @onready var card_fx: Control = $CardFX
@@ -66,7 +67,9 @@ func _setup_visuals() -> void:
 	if def is SpellCardDefinition:
 		attack_label.visible = false
 		endurance_label.visible = false
-
+	else: #this makes sure the stats on a dummy card aren't set invisible and never undone
+		attack_label.visible = true
+		endurance_label.visible = true
 
 func _refresh_visuals() -> void:
 	#Fill with visual representation of card instance
@@ -74,6 +77,7 @@ func _refresh_visuals() -> void:
 	name_label.text = def.card_name.to_upper()
 	TextHandler.fit_name_label(name_label)
 	gate_label.text = CardViewManager.format_gate_label(card_instance.get_gate())
+	set_label.text = CardSetDatabase.get_set(def.sets[0]).display_name
 	_gated_feedback(card_instance)
 	card_fx.get_active_fx(card_instance)
 	if def is CreatureCardDefinition:

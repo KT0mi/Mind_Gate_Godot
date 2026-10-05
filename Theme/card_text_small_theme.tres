@@ -4,6 +4,6 @@
 
 [resource]
 Label/colors/font_color = Color(0.26741004, 0.2301, 0.39, 1)
-Label/constants/line_spacing = 8
+Label/constants/line_spacing = 0
 Label/font_sizes/font_size = 11
 Label/fonts/font = ExtResource("1_37lbk")

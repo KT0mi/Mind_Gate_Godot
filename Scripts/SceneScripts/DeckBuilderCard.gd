@@ -2,8 +2,9 @@ class_name DeckBuilderCard extends PanelContainer
 
 enum Context {AVAILABLE, DECK, VIEW}
 
-signal add_requested(id: StringName, add_max: bool)
-signal remove_requested(id: StringName)
+signal on_right_click(id: StringName, shift_pressed: bool)
+signal on_left_click(id: StringName, shift_pressed: bool)
+
 var add_disabled : bool = false
 var remove_disabled : bool = true
 var context : Context = Context.AVAILABLE
@@ -13,6 +14,7 @@ var context : Context = Context.AVAILABLE
 @onready var attack_label: Label = $Labels/StatsLabel/AttackLabel/AttackLabel
 @onready var endurance_label: Label = $Labels/StatsLabel/EnduranceLabel/EnduranceLabel
 @onready var gate_label: Label = $Labels/StatsLabel/Gate/GateLabel
+@onready var set_label: Label = $Labels/SetLabel/SetLabel
 @onready var count_node: Control = $Labels/Count
 @onready var count_label: Label = $Labels/Count/CountLabel
 @onready var hidden_overlay: ColorRect = $HiddenOverlay
@@ -28,6 +30,7 @@ func setup(def: CardDefinition) -> void:
 	name_label.text = def.card_name.to_upper()
 	TextHandler.fit_name_label(name_label)
 	gate_label.text = CardViewManager.format_gate_label(def.gate)
+	set_label.text = CardSetDatabase.get_set(def.sets[0]).display_name
 
 	if def is CreatureCardDefinition:
 		attack_label.text = str(def.attack)
@@ -53,10 +56,10 @@ func refresh_state(count: int, max_copies: int, can_add: bool, can_remove: bool)
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and context!=Context.VIEW:
 		if event.button_index == MOUSE_BUTTON_LEFT and not add_disabled:
-			add_requested.emit(definition.id, event.shift_pressed)
+			on_left_click.emit(definition.id, event.shift_pressed)
 			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_RIGHT and not remove_disabled:
-			remove_requested.emit(definition.id)
+			on_right_click.emit(definition.id, event.shift_pressed)
 			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_MIDDLE:
 			CardInspector.open_definition(definition)

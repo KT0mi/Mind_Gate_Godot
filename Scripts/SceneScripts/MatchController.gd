@@ -34,7 +34,6 @@ func _ready() -> void:
 	ChoiceManager.reset()
 	
 	_build_debug_ui()
-	#ChoiceManager.choice_requested.connect(_on_choice_requested)
 	TurnController.phase_changed.connect(_on_phase_changed)
 	
 	#Connect UI Elements
@@ -43,6 +42,7 @@ func _ready() -> void:
 	HoverHandler.register_hover(end_phase_button)
 	HoverHandler.register_hover(forget_turn_button)
 	
+	StateData.match_ocurring = true
 	await _setup_decks()
 	await _setup_players()
 	await TurnController.start_match()
@@ -90,7 +90,7 @@ func _build_debug_ui() -> void:
 	add_child(_canvas)
  
 	var vbox := VBoxContainer.new()
-	vbox.position = Vector2(32, 128)
+	vbox.position = Vector2(32, 540)
 	_canvas.add_child(vbox)
  
 	_phase_label = Label.new()
@@ -149,6 +149,7 @@ func _game_end(losing_player : Player) -> void:
 	game_end_label.visible = true
 
 func _exit_tree() -> void:
+	StateData.match_ocurring = false
 	if TurnController.phase_changed.is_connected(_on_phase_changed):
 		TurnController.phase_changed.disconnect(_on_phase_changed)
 	if RulesEngine.player_defeated.is_connected(_game_end):

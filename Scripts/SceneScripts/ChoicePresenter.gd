@@ -1,9 +1,9 @@
 class_name ChoicePresenter extends Control
 
 
-@onready var prompt_label: Label = $ChoiceLabelContainer/PromptLabel
-@onready var selection_label: Label = $ChoiceLabelContainer/SelectionLabel
-@onready var confirm_button: Button = $ChoiceLabelContainer/ConfirmButton
+@onready var prompt_label: Label = $ChoiceUI/ChoiceLabelContainer/PromptLabel
+@onready var selection_label: Label = $ChoiceUI/ChoiceLabelContainer/SelectionLabel
+@onready var confirm_button: Button = $ChoiceUI/ChoiceLabelContainer/ConfirmButton
 @onready var battle_button : Button = $BattleButton
 
 enum State {IDLE, LOCAL_CHOICE, WAITING_FOR_OTHER_PLAYER}

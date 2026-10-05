@@ -8,25 +8,6 @@
 [node name="CardInspector" type="CanvasLayer" unique_id=1817531272]
 script = ExtResource("1_0nlpk")
 
-[node name="PersistCardText" type="RichTextLabel" parent="." unique_id=370299198]
-visible = false
-custom_minimum_size = Vector2(480, 128)
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = -176.0
-offset_right = 512.0
-offset_bottom = -32.000244
-grow_vertical = 0
-mouse_filter = 2
-theme = ExtResource("2_fxm2w")
-theme_override_font_sizes/normal_font_size = 30
-theme_override_font_sizes/bold_font_size = 30
-bbcode_enabled = true
-text = "CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT"
-fit_content = true
-
 [node name="ZoneInspector" type="Control" parent="." unique_id=912267618]
 layout_mode = 3
 anchors_preset = 15

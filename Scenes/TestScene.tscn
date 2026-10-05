@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://xwojdvdygonc" path="res://Scenes/UI/PixelNoiseBackground.tscn" id="9_5rbs6"]
 [ext_resource type="Texture2D" uid="uid://cdeudy7g22c8j" path="res://Assets/Images/UI/phase_labels/start_phase.png" id="10_t2vuu"]
 [ext_resource type="Texture2D" uid="uid://kuhyoe6qdbe7" path="res://Assets/Images/UI/phase_labels/draw_phase.png" id="11_lp1f3"]
+[ext_resource type="Script" uid="uid://ckanp5bmytheq" path="res://Scripts/SceneScripts/PersistentCardText.gd" id="12_fi7j4"]
 [ext_resource type="Texture2D" uid="uid://x661qm7ucoij" path="res://Assets/Images/UI/phase_labels/play_phase.png" id="12_p30di"]
 [ext_resource type="Texture2D" uid="uid://5wafa03mwrhs" path="res://Assets/Images/UI/phase_labels/battle_phase.png" id="13_8c81w"]
 [ext_resource type="Texture2D" uid="uid://dsuucvgtjfyh0" path="res://Assets/Images/UI/phase_labels/end_phase.png" id="14_fi7j4"]
@@ -99,10 +100,10 @@ position = Vector2(544, 576)
 zone_type = 4
 
 [node name="P1Hand" parent="." unique_id=510289264 instance=ExtResource("2_8k7wh")]
-position = Vector2(960, 911)
+position = Vector2(960, 928)
 capacity = -1
 zone_type = 0
-arrangement = 2
+arrangement = 1
 card_spacing = 90.0
 fan_angle_step_degrees = 7.0
 
@@ -127,7 +128,7 @@ capacity = -1
 zone_type = 3
 
 [node name="P1SpellBook" parent="." unique_id=216035090 instance=ExtResource("5_0f5h7")]
-position = Vector2(1248, 576)
+position = Vector2(1232, 576)
 
 [node name="P2Arena1" parent="." unique_id=1267337120 instance=ExtResource("3_8k7wh")]
 position = Vector2(800, 352)
@@ -151,7 +152,7 @@ lane_index = 2
 card_spacing = 145.0
 
 [node name="P2Deck" parent="." unique_id=498374642 instance=ExtResource("2_8k7wh")]
-position = Vector2(1408, 0)
+position = Vector2(1360, 0)
 capacity = -1
 owner_is_player_one = false
 zone_type = 2
@@ -172,13 +173,13 @@ card_spacing = 90.0
 fan_angle_step_degrees = 7.0
 
 [node name="P2Graveyard" parent="." unique_id=796521439 instance=ExtResource("2_8k7wh")]
-position = Vector2(1216, 0)
+position = Vector2(560, 0)
 capacity = -1
 owner_is_player_one = false
 zone_type = 3
 
 [node name="P2SpellBook2" parent="." unique_id=406898785 instance=ExtResource("5_0f5h7")]
-position = Vector2(1248, 352)
+position = Vector2(1232, 352)
 owner_is_player_one = false
 
 [node name="UI" type="Control" parent="." unique_id=392019201]
@@ -205,53 +206,69 @@ vertical_alignment = 1
 
 [node name="EndPhaseButton" type="Button" parent="UI" unique_id=1081657256]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 352.0
-offset_right = 310.0
-offset_bottom = 452.0
+offset_left = 1568.0
+offset_top = 736.0
+offset_right = 1815.0
+offset_bottom = 836.0
 theme = ExtResource("7_c264a")
 text = "End Phase"
 
 [node name="ForgetTurnButton" type="Button" parent="UI" unique_id=1910225129]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 576.0
-offset_right = 310.0
-offset_bottom = 676.0
+offset_left = 1552.0
+offset_top = 896.0
+offset_right = 1847.0
+offset_bottom = 996.0
 theme = ExtResource("7_c264a")
 text = "Forget Turn"
 
+[node name="ChoicePanel" type="Panel" parent="UI" unique_id=1997708332]
+layout_mode = 0
+offset_right = 432.0
+offset_bottom = 771.0
+mouse_filter = 2
+theme = ExtResource("7_c264a")
+
 [node name="ChoicePresenter" type="Control" parent="UI" unique_id=1337662259]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 432.0
+offset_bottom = 720.0
+mouse_filter = 2
 script = ExtResource("8_6xh1p")
 
-[node name="ChoiceLabelContainer" type="VBoxContainer" parent="UI/ChoicePresenter" unique_id=1696683618]
-custom_minimum_size = Vector2(480, 0)
+[node name="ChoiceUI" type="Control" parent="UI/ChoicePresenter" unique_id=1841037867]
+anchors_preset = 0
+offset_right = 432.0
+offset_bottom = 720.0
+
+[node name="ChoiceLabelContainer" type="VBoxContainer" parent="UI/ChoicePresenter/ChoiceUI" unique_id=1696683618]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 768.0
-offset_right = 512.0
-offset_bottom = 900.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 429.0
+offset_bottom = 768.0
 mouse_filter = 2
 
-[node name="PromptLabel" type="Label" parent="UI/ChoicePresenter/ChoiceLabelContainer" unique_id=458327305]
+[node name="PromptLabel" type="Label" parent="UI/ChoicePresenter/ChoiceUI/ChoiceLabelContainer" unique_id=458327305]
 layout_mode = 2
 theme = ExtResource("7_c264a")
+theme_override_colors/font_color = Color(0.26666668, 0.23137255, 0.3882353, 1)
 theme_override_font_sizes/font_size = 28
 text = "CHOICE REQUEST LABEL"
+horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="SelectionLabel" type="Label" parent="UI/ChoicePresenter/ChoiceLabelContainer" unique_id=9317734]
+[node name="SelectionLabel" type="Label" parent="UI/ChoicePresenter/ChoiceUI/ChoiceLabelContainer" unique_id=9317734]
 layout_mode = 2
 theme = ExtResource("7_c264a")
+theme_override_colors/font_color = Color(0.26666668, 0.23137255, 0.3882353, 1)
 theme_override_font_sizes/font_size = 28
 text = "0/0"
+horizontal_alignment = 1
 
-[node name="ConfirmButton" type="Button" parent="UI/ChoicePresenter/ChoiceLabelContainer" unique_id=737149558]
+[node name="ConfirmButton" type="Button" parent="UI/ChoicePresenter/ChoiceUI/ChoiceLabelContainer" unique_id=737149558]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 theme = ExtResource("7_c264a")
 text = "CONFIRM"
 
@@ -263,6 +280,60 @@ offset_right = 1408.0
 offset_bottom = 640.0
 theme = ExtResource("7_c264a")
 text = "BATTLE!"
+
+[node name="PersistentCardTextPresenter" type="Control" parent="UI" unique_id=1067188549]
+anchors_preset = 0
+offset_right = 432.0
+offset_bottom = 720.0
+mouse_filter = 2
+script = ExtResource("12_fi7j4")
+
+[node name="CardTextUI" type="Control" parent="UI/PersistentCardTextPresenter" unique_id=342334091]
+anchors_preset = 0
+offset_right = 432.0
+offset_bottom = 720.0
+
+[node name="CardTextPanel" type="Panel" parent="UI/PersistentCardTextPresenter/CardTextUI" unique_id=273964061]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_c264a")
+
+[node name="CardTextContainer" type="VBoxContainer" parent="UI/PersistentCardTextPresenter/CardTextUI" unique_id=1025895771]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 429.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="CardNameLabel" type="Label" parent="UI/PersistentCardTextPresenter/CardTextUI/CardTextContainer" unique_id=282237623]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_c264a")
+theme_override_colors/font_color = Color(0.26666668, 0.23137255, 0.3882353, 1)
+theme_override_font_sizes/font_size = 36
+text = "Card Name:"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CardTextLabel" type="RichTextLabel" parent="UI/PersistentCardTextPresenter/CardTextUI/CardTextContainer" unique_id=1532507895]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_c264a")
+theme_override_colors/default_color = Color(0.26666668, 0.23137255, 0.3882353, 1)
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "CARD TEXT CARD TEXT CARD TEXT CARD TEXT CARD TEXT"
+fit_content = true
 
 [node name="PixelNoiseBackground" parent="UI" unique_id=281833876 instance=ExtResource("9_5rbs6")]
 process_mode = 4
@@ -309,8 +380,8 @@ texture = ExtResource("14_fi7j4")
 [node name="CloseButton" type="Button" parent="UI" unique_id=475295208]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 32.0
-offset_right = 67.0
-offset_bottom = 57.0
+offset_top = 992.0
+offset_right = 91.0
+offset_bottom = 1052.0
 theme = ExtResource("7_c264a")
 text = "X"

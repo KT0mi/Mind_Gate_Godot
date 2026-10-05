@@ -1,6 +1,5 @@
 [gd_resource type="Theme" format=3 uid="uid://bxjx78kc5nbmv"]
 
-[ext_resource type="FontFile" uid="uid://2v8vmh755jil" path="res://Assets/Fonts/Minecraft.ttf" id="1_t8nia"]
 [ext_resource type="Texture2D" uid="uid://di877yfvjayjt" path="res://Assets/Images/UI/default_theme/4button_normal.png" id="2_u1xyr"]
 [ext_resource type="Texture2D" uid="uid://cnum1rhkt2pua" path="res://Assets/Images/UI/default_theme/4button_pressed.png" id="3_ipf01"]
 [ext_resource type="FontVariation" uid="uid://daqcgf2pltuv8" path="res://Assets/Fonts/card_text_small_var.tres" id="4_2hahr"]
@@ -66,8 +65,8 @@ RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 2
 RichTextLabel/font_sizes/bold_font_size = 10
 RichTextLabel/font_sizes/normal_font_size = 10
-RichTextLabel/fonts/bold_font = ExtResource("1_t8nia")
-RichTextLabel/fonts/normal_font = ExtResource("1_t8nia")
+RichTextLabel/fonts/bold_font = ExtResource("4_2hahr")
+RichTextLabel/fonts/normal_font = ExtResource("4_2hahr")
 ScrollContainer/constants/scrollbar_h_separation = 8
 ScrollContainer/constants/scrollbar_v_separation = 8
 TextEdit/constants/outline_size = 5
